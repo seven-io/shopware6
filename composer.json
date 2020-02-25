@@ -1,0 +1,49 @@
+{
+    "authors": [
+        {
+            "name": "sms77 e.K.",
+            "email": "support@sms77.io",
+            "homepage": "https://www.www.sms77.io",
+            "role": "Organization"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Sms77\\Shopware6\\": "src/"
+        }
+    },
+    "description": "Shopware 6 plugin to programmatically make us of the sms77io SMS gateway",
+    "extra": {
+        "shopware-plugin-class": "Sms77\\Shopware6\\Sms77Shopware6",
+        "copyright": "(c) by sms77 e.K.",
+        "label": {
+            "de-DE": "sms77io",
+            "en-GB": "sms77io"
+        },
+        "description": {
+            "de-DE": "Plugin zum programmatischem Versand von SMS via dem sms77io Gateway",
+            "en-GB": "Plugin to programmatically make us of the sms77io SMS gateway"
+        },
+        "supportLink": {
+            "de-DE": "https://www.sms77.io/de/",
+            "en-GB": "https://www.sms77.io/en/"
+        }
+    },
+    "keywords": [
+        "sms",
+        "shopware"
+    ],
+    "license": "MIT",
+    "name": "sms77/shopware6",
+    "require": {
+        "shopware/core": "*",
+        "shopware/administration": "*",
+        "sms77/api": "^1.1"
+    },
+    "support": {
+        "email": "support@sms77.io",
+        "rss": "https://www.sms77.io/en/feed/",
+        "docs": "https://www.sms77.io/en/docs/"
+    },
+    "type": "shopware-platform-plugin"
+}
