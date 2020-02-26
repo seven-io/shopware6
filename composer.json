@@ -3,7 +3,7 @@
         {
             "name": "sms77 e.K.",
             "email": "support@sms77.io",
-            "homepage": "https://www.www.sms77.io",
+            "homepage": "https://www.sms77.io",
             "role": "Organization"
         }
     ],
@@ -43,7 +43,7 @@
     "support": {
         "email": "support@sms77.io",
         "rss": "https://www.sms77.io/en/feed/",
-        "docs": "https://www.sms77.io/en/docs/"
+        "docs": "https://www.sms77.io/en/docs/third-party-solutions/shopware-6/"
     },
     "type": "shopware-platform-plugin"
 }
