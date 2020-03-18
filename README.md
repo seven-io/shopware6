@@ -8,9 +8,7 @@
 <ol>
 <li>Open a shell and navigate to the Shopware installation directory</li>
 <li>Run <code>composer require sms77/shopware6</code></li>
-<li>Run <code>php bin/magento setup:upgrade</code></li>
-<li>Run <code>php bin/magento setup:di:compile</code></li>
-<li>Run <code>php bin/magento cache:clean</code></li>
+<li>Run <code>php bin/console cache:clear</code></li>
 <li>Navigate to Administration -&gt; Settings -&gt; System -&gt; Plugins -&gt; sms77io</li>
 <li>Enter and save the required API key</li>
 </ol>
