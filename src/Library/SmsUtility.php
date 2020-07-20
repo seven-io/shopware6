@@ -8,23 +8,20 @@ use Shopware\Core\Framework\DataAbstractionLayer\EntityRepository;
 use Shopware\Core\Framework\DataAbstractionLayer\Search\Criteria;
 use Sms77\Api\Client;
 
-class SmsUtility
-{
+class SmsUtility {
     /** @var EntityRepository $orderAddressRepository */
     protected $orderAddressRepository;
 
     /** @var Configuration $configuration */
     protected $configuration;
 
-    public function __construct(Configuration $configuration, EntityRepository $orderAddressRepository)
-    {
+    public function __construct(Configuration $configuration, EntityRepository $orderAddressRepository) {
         $this->configuration = $configuration;
 
         $this->orderAddressRepository = $orderAddressRepository;
     }
 
-    public function send(array $pluginConfig, OrderStateMachineStateChangeEvent $event): array
-    {
+    public function send(array $pluginConfig, OrderStateMachineStateChangeEvent $event): array {
         $response = null;
         $phone = null;
         $client = null;
@@ -72,8 +69,7 @@ class SmsUtility
         return compact('phone', 'address', 'text', 'response', 'extras', 'client');
     }
 
-    public static function getText(string $eventName, array $pluginConfig): ?string
-    {
+    public static function getText(string $eventName, array $pluginConfig): ?string {
         $text = null;
 
         $mappings = [

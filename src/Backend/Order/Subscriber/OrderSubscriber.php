@@ -9,8 +9,7 @@ use Sms77\Shopware6\Library\Configuration;
 use Sms77\Shopware6\Library\SmsUtility;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-class OrderSubscriber implements EventSubscriberInterface
-{
+class OrderSubscriber implements EventSubscriberInterface {
     /** @var Logger $logger */
     protected $logger;
 
@@ -20,8 +19,7 @@ class OrderSubscriber implements EventSubscriberInterface
     /** @var SmsUtility $smsUtility */
     private $smsUtility;
 
-    public function __construct(Logger $logger, Configuration $configuration, SmsUtility $smsUtility)
-    {
+    public function __construct(Logger $logger, Configuration $configuration, SmsUtility $smsUtility) {
         $logger->pushHandler(new ErrorLogHandler());
 
         $this->logger = $logger;
@@ -31,8 +29,7 @@ class OrderSubscriber implements EventSubscriberInterface
         $this->smsUtility = $smsUtility;
     }
 
-    public static function getSubscribedEvents(): array
-    {
+    public static function getSubscribedEvents(): array {
         return [
             'state_enter.order.state.cancelled' => 'onOrderCancelled',
             'state_enter.order.state.completed' => 'onOrderCompleted',
@@ -52,75 +49,61 @@ class OrderSubscriber implements EventSubscriberInterface
         ];
     }
 
-    private function sendIfEventEnabled(string $eventName, OrderStateMachineStateChangeEvent $event)
-    {
+    public function onOrderCancelled(OrderStateMachineStateChangeEvent $event) {
+        $this->sendIfEventEnabled('order.state.cancelled', $event);
+    }
+
+    private function sendIfEventEnabled(string $eventName, OrderStateMachineStateChangeEvent $event) {
         if ($this->configuration->isEventEnabled('state_enter.' . $eventName)) {
             $this->smsUtility->send($this->configuration->config, $event);
         }
     }
 
-    public function onOrderCancelled(OrderStateMachineStateChangeEvent $event)
-    {
-        $this->sendIfEventEnabled('order.state.cancelled', $event);
-    }
-
-    public function onOrderCompleted(OrderStateMachineStateChangeEvent $event)
-    {
+    public function onOrderCompleted(OrderStateMachineStateChangeEvent $event) {
         $this->sendIfEventEnabled('order.state.completed', $event);
     }
 
-    public function onOrderDeliveryCancelled(OrderStateMachineStateChangeEvent $event)
-    {
+    public function onOrderDeliveryCancelled(OrderStateMachineStateChangeEvent $event) {
         $this->sendIfEventEnabled('order_delivery.state.cancelled', $event);
     }
 
-    public function onOrderDeliveryReturned(OrderStateMachineStateChangeEvent $event)
-    {
+    public function onOrderDeliveryReturned(OrderStateMachineStateChangeEvent $event) {
         $this->sendIfEventEnabled('order_delivery.state.returned', $event);
     }
 
-    public function onOrderDeliveryReturnedPartially(OrderStateMachineStateChangeEvent $event)
-    {
+    public function onOrderDeliveryReturnedPartially(OrderStateMachineStateChangeEvent $event) {
         $this->sendIfEventEnabled('order_delivery.state.returned_partially', $event);
     }
 
-    public function onOrderDeliveryShipped(OrderStateMachineStateChangeEvent $event)
-    {
+    public function onOrderDeliveryShipped(OrderStateMachineStateChangeEvent $event) {
         $this->sendIfEventEnabled('order_delivery.state.shipped', $event);
     }
 
-    public function onOrderDeliveryShippedPartially(OrderStateMachineStateChangeEvent $event)
-    {
+    public function onOrderDeliveryShippedPartially(OrderStateMachineStateChangeEvent $event) {
         $this->sendIfEventEnabled('order_delivery.state.shipped_partially', $event);
     }
 
-    public function onOrderTransactionCancelled(OrderStateMachineStateChangeEvent $event)
-    {
+    public function onOrderTransactionCancelled(OrderStateMachineStateChangeEvent $event) {
         $this->sendIfEventEnabled('order_transaction.state.cancelled', $event);
     }
 
-    public function onOrderTransactionPaid(OrderStateMachineStateChangeEvent $event)
-    {
+    public function onOrderTransactionPaid(OrderStateMachineStateChangeEvent $event) {
         $this->sendIfEventEnabled('order_transaction.state.paid', $event);
     }
 
-    public function onOrderTransactionPaidPartially(OrderStateMachineStateChangeEvent $event)
-    {
+    public function onOrderTransactionPaidPartially(OrderStateMachineStateChangeEvent $event) {
         $this->sendIfEventEnabled('order_transaction.state.paid_partially', $event);
     }
 
-    public function onOrderTransactionRefunded(OrderStateMachineStateChangeEvent $event)
-    {
+    public function onOrderTransactionRefunded(OrderStateMachineStateChangeEvent $event) {
         $this->sendIfEventEnabled('order_transaction.state.refunded', $event);
     }
 
-    public function onOrderTransactionRefundedPartially(OrderStateMachineStateChangeEvent $event)
-    {
+    public function onOrderTransactionRefundedPartially(OrderStateMachineStateChangeEvent $event) {
         $this->sendIfEventEnabled('order_transaction.state.refunded_partially', $event);
     }
 
-    public function onOrderTransactionReminded(OrderStateMachineStateChangeEvent $event)
-    {
+    public function onOrderTransactionReminded(OrderStateMachineStateChangeEvent $event) {
         $this->sendIfEventEnabled('order_transaction.state.reminded', $event);
     }
 }

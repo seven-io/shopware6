@@ -13,7 +13,7 @@
             <h2>{{ $tc('sms77-api.messages.header') }}</h2>
 
             <sw-entity-listing
-                    :columns="columns"
+                    :columns="$options.columns"
                     detailRoute="sw.mail.template.detail_head_foot"
                     :isLoading="isLoading"
                     :items="messages"

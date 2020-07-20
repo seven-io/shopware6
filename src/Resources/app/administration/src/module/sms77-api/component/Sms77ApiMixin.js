@@ -59,17 +59,14 @@ export const Sms77ApiMixin = {
             return config;
         },
 
-        async sendSms(form) {
-            const toBool = (k, v) => this.$options.optionalFields.booleans.includes(k)
-                ? 'on' === v ? 1 : 0 : v;
-
-            const toObject = form => Object.assign(...
-                [...new FormData(form).entries()]
-                    .filter(([, v]) => '' !== v)
-                    .map(([k, v]) => ({[k]: toBool(k, v)})));
+        async sendSms(config) {
+            for (const [k, v] of Object.entries(config)) {
+                if ('' === v || null === v) {
+                    delete config[k];
+                }
+            }
 
             const successKey = 'success';
-            const config = toObject(form);
             const sms77Res = await this.sms77Client.sms(config);
             const code = Number.isInteger(sms77Res)
                 ? sms77Res : config.json
@@ -92,11 +89,10 @@ export const Sms77ApiMixin = {
             return entity;
         },
 
-        findAll() {
-            return this.repository
+        async findAll() {
+            return await this.repository
                 .search(new Shopware.Data.Criteria()
-                    .addSorting(Shopware.Data.Criteria.sort('createdAt', 'DESC')), context)
-                .then(messages => messages);
+                    .addSorting(Shopware.Data.Criteria.sort('createdAt', 'DESC')), context);
         },
 
         async saveEntity(proxy) {
@@ -109,14 +105,10 @@ export const Sms77ApiMixin = {
             return response;
         },
 
-        setMessages() {
-            return this.findAll()
-                .then(messages => {
-                    this.messages = messages;
+        async setMessages() {
+            this.messages = await this.findAll();
 
-                    return this.messages;
-                })
-                .catch(fromRepo => console.error({fromRepo}));
+            return this.messages;
         },
     },
 };

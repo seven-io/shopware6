@@ -9,8 +9,11 @@
             <name>apiKey</name>
             <label>API key</label>
             <label lang="de-DE">API-Schlüssel</label>
-            <helpText>An API key is needed in order to send SMS. Get yours now at sms77.io.</helpText>
-            <helpText lang="de-DE">Ein API-Schlüssel wird benötigt um SMS senden zu können. Erfahren Sie mehr auf sms77.io.
+            <helpText>An API key is needed in order to send SMS. Get yours now
+                at sms77.io.
+            </helpText>
+            <helpText lang="de-DE">Ein API-Schlüssel wird benötigt um SMS senden
+                zu können. Erfahren Sie mehr auf sms77.io.
             </helpText>
             <copyable>true</copyable>
         </input-field>
@@ -20,7 +23,9 @@
             <label>Events</label>
             <label lang="de-DE">Ereignisse</label>
             <helpText>Defines the events when to send SMS.</helpText>
-            <helpText lang="de-DE">Definiert die Ereignisse zum Versenden von SMS.</helpText>
+            <helpText lang="de-DE">Definiert die Ereignisse zum Versenden von
+                SMS.
+            </helpText>
             <options>
                 <option>
                     <id>state_enter.order.state.cancelled</id>
@@ -89,7 +94,8 @@
                 </option>
 
                 <option>
-                    <id>state_enter.order_transaction.state.refunded_partially</id>
+                    <id>state_enter.order_transaction.state.refunded_partially
+                    </id>
                     <name>Payment partially refunded</name>
                     <name lang="de-DE">Bezahlung teils retourniert</name>
                 </option>
@@ -106,9 +112,12 @@
             <name>textOnOrderCancelled</name>
             <label>Cancellation message</label>
             <label lang="de-DE">Stornonachricht</label>
-            <defaultValue>Dear customer. We are sorry about the cancelled order. We hope to serve you again soon. Best regards!</defaultValue>
+            <defaultValue>Dear customer. We are sorry about the cancelled order.
+                We hope to serve you again soon. Best regards!
+            </defaultValue>
             <helpText>Defines the text content for cancellations.</helpText>
-            <helpText lang="de-DE">Definiert den SMS-Inhalt bei Stornierungen.</helpText>
+            <helpText lang="de-DE">Definiert den SMS-Inhalt bei Stornierungen.
+            </helpText>
             <copyable>true</copyable>
         </input-field>
 
@@ -116,9 +125,13 @@
             <name>textOnOrderCompleted</name>
             <label>Completion message</label>
             <label lang="de-DE">Finalisierungsnachricht</label>
-            <defaultValue>Dear customer. Your order has been marked as completed. Enjoy your goods. Best regards!</defaultValue>
+            <defaultValue>Dear customer. Your order has been marked as
+                completed. Enjoy your goods. Best regards!
+            </defaultValue>
             <helpText>Defines the text content for order completions.</helpText>
-            <helpText lang="de-DE">Definiert den SMS-Inhalt bei Bestellfinalisierung.</helpText>
+            <helpText lang="de-DE">Definiert den SMS-Inhalt bei
+                Bestellfinalisierung.
+            </helpText>
             <copyable>true</copyable>
         </input-field>
 
@@ -126,9 +139,14 @@
             <name>textOnOrderDeliveryCancelled</name>
             <label>Delivery cancellation message</label>
             <label lang="de-DE">Lieferstorno-Nachricht</label>
-            <defaultValue>Dear customer. Your order delivery has been marked as cancelled. With best regards!</defaultValue>
-            <helpText>Defines the text content for delivery cancellations.</helpText>
-            <helpText lang="de-DE">Definiert den SMS-Inhalt bei Versandstornierungen.</helpText>
+            <defaultValue>Dear customer. Your order delivery has been marked as
+                cancelled. With best regards!
+            </defaultValue>
+            <helpText>Defines the text content for delivery cancellations.
+            </helpText>
+            <helpText lang="de-DE">Definiert den SMS-Inhalt bei
+                Versandstornierungen.
+            </helpText>
             <copyable>true</copyable>
         </input-field>
 
@@ -136,9 +154,14 @@
             <name>textOnOrderDeliveryShipped</name>
             <label>Shipping message</label>
             <label lang="de-DE">Versandnachricht</label>
-            <defaultValue>Dear customer. Your order is ready to be shipped. Log in to your customer account for more information. Best regards!</defaultValue>
-            <helpText>Defines the text content for shipping confirmation.</helpText>
-            <helpText lang="de-DE">Definiert den SMS-Inhalt bei Versandbestätigung.</helpText>
+            <defaultValue>Dear customer. Your order is ready to be shipped. Log
+                in to your customer account for more information. Best regards!
+            </defaultValue>
+            <helpText>Defines the text content for shipping confirmation.
+            </helpText>
+            <helpText lang="de-DE">Definiert den SMS-Inhalt bei
+                Versandbestätigung.
+            </helpText>
             <copyable>true</copyable>
         </input-field>
 
@@ -146,9 +169,16 @@
             <name>textOnOrderDeliveryShippedPartially</name>
             <label>Part shipping message</label>
             <label lang="de-DE">Teilmengen-Versandnachricht</label>
-            <defaultValue>Dear customer. Your order is ready to be partially shipped. Log in to your customer account for more information. Best regards!</defaultValue>
-            <helpText>Defines the text content for partial shipping confirmation.</helpText>
-            <helpText lang="de-DE">Definiert den SMS-Inhalt einer Teil-Versandbestätigung.</helpText>
+            <defaultValue>Dear customer. Your order is ready to be partially
+                shipped. Log in to your customer account for more information.
+                Best regards!
+            </defaultValue>
+            <helpText>Defines the text content for partial shipping
+                confirmation.
+            </helpText>
+            <helpText lang="de-DE">Definiert den SMS-Inhalt einer
+                Teil-Versandbestätigung.
+            </helpText>
             <copyable>true</copyable>
         </input-field>
 
@@ -156,9 +186,12 @@
             <name>textOnOrderDeliveryReturned</name>
             <label>Return message</label>
             <label lang="de-DE">Retournachricht</label>
-            <defaultValue>Dear customer. Your order has been marked as returned. With best regards!</defaultValue>
+            <defaultValue>Dear customer. Your order has been marked as returned.
+                With best regards!
+            </defaultValue>
             <helpText>Defines the text content for returns.</helpText>
-            <helpText lang="de-DE">Definiert den SMS-Inhalt bei Retouren.</helpText>
+            <helpText lang="de-DE">Definiert den SMS-Inhalt bei Retouren.
+            </helpText>
             <copyable>true</copyable>
         </input-field>
 
@@ -166,9 +199,12 @@
             <name>textOnOrderDeliveryReturnedPartially</name>
             <label>Partial return message</label>
             <label lang="de-DE">Teilretoure-Nachricht</label>
-            <defaultValue>Dear customer. Your order has been partially marked as returned. With best regards!</defaultValue>
+            <defaultValue>Dear customer. Your order has been partially marked as
+                returned. With best regards!
+            </defaultValue>
             <helpText>Defines the text content for partial returns.</helpText>
-            <helpText lang="de-DE">Definiert den SMS-Inhalt bei Teil-Retouren.</helpText>
+            <helpText lang="de-DE">Definiert den SMS-Inhalt bei Teil-Retouren.
+            </helpText>
             <copyable>true</copyable>
         </input-field>
 
@@ -176,9 +212,14 @@
             <name>textOnOrderTransactionPaid</name>
             <label>Payment message</label>
             <label lang="de-DE">Zahlungsnachricht</label>
-            <defaultValue>Dear customer. Your order has been marked as paid. Best regards!</defaultValue>
-            <helpText>Defines the text content for the payment clearance.</helpText>
-            <helpText lang="de-DE">Definiert den SMS-Inhalt für den Zahlungseingang.</helpText>
+            <defaultValue>Dear customer. Your order has been marked as paid.
+                Best regards!
+            </defaultValue>
+            <helpText>Defines the text content for the payment clearance.
+            </helpText>
+            <helpText lang="de-DE">Definiert den SMS-Inhalt für den
+                Zahlungseingang.
+            </helpText>
             <copyable>true</copyable>
         </input-field>
 
@@ -186,9 +227,15 @@
             <name>textOnOrderTransactionPaidPartially</name>
             <label>Part payment message</label>
             <label lang="de-DE">Teilzahlungs-Nachricht</label>
-            <defaultValue>Dear customer. Your order has been marked as partially paid. Best regards!</defaultValue>
-            <helpText>Defines the text content for the partial payment clearance.</helpText>
-            <helpText lang="de-DE">Definiert den SMS-Inhalt für den Eingang von Teilzahlungen.</helpText>
+            <defaultValue>Dear customer. Your order has been marked as partially
+                paid. Best regards!
+            </defaultValue>
+            <helpText>Defines the text content for the partial payment
+                clearance.
+            </helpText>
+            <helpText lang="de-DE">Definiert den SMS-Inhalt für den Eingang von
+                Teilzahlungen.
+            </helpText>
             <copyable>true</copyable>
         </input-field>
 
@@ -196,9 +243,13 @@
             <name>textOnOrderTransactionRefunded</name>
             <label>Refund message</label>
             <label lang="de-DE">Rückerstattung</label>
-            <defaultValue>Dear customer. The order amount has been marked as being refunded. Best regards!</defaultValue>
+            <defaultValue>Dear customer. The order amount has been marked as
+                being refunded. Best regards!
+            </defaultValue>
             <helpText>Defines the text content for refunds.</helpText>
-            <helpText lang="de-DE">Definiert den SMS-Inhalt für Rückerstattungen.</helpText>
+            <helpText lang="de-DE">Definiert den SMS-Inhalt für
+                Rückerstattungen.
+            </helpText>
             <copyable>true</copyable>
         </input-field>
 
@@ -206,9 +257,13 @@
             <name>textOnOrderTransactionRefundedPartially</name>
             <label>Partial refund message</label>
             <label lang="de-DE">Teil-Rückerstattung</label>
-            <defaultValue>Dear customer. The order amount has been marked as being partially refunded. Best regards!</defaultValue>
+            <defaultValue>Dear customer. The order amount has been marked as
+                being partially refunded. Best regards!
+            </defaultValue>
             <helpText>Defines the text content for partial refunds.</helpText>
-            <helpText lang="de-DE">Definiert den SMS-Inhalt für Teil-Rückerstattungen.</helpText>
+            <helpText lang="de-DE">Definiert den SMS-Inhalt für
+                Teil-Rückerstattungen.
+            </helpText>
             <copyable>true</copyable>
         </input-field>
 
@@ -216,9 +271,15 @@
             <name>textOnOrderTransactionReminded</name>
             <label>Payment reminder message</label>
             <label lang="de-DE">Zahlungserinnerung</label>
-            <defaultValue>Dear customer. This is just a little reminder that your order still needs to be paid before it gets shipped. Best regards!</defaultValue>
-            <helpText>Defines the text content for the payment reminder.</helpText>
-            <helpText lang="de-DE">Definiert den SMS-Inhalt für die Zahlungserinnerung.</helpText>
+            <defaultValue>Dear customer. This is just a little reminder that
+                your order still needs to be paid before it gets shipped. Best
+                regards!
+            </defaultValue>
+            <helpText>Defines the text content for the payment reminder.
+            </helpText>
+            <helpText lang="de-DE">Definiert den SMS-Inhalt für die
+                Zahlungserinnerung.
+            </helpText>
             <copyable>true</copyable>
         </input-field>
 
@@ -226,9 +287,14 @@
             <name>textOnOrderTransactionCancelled</name>
             <label>Payment cancellation message</label>
             <label lang="de-DE">Zahlungsausfall-Nachricht</label>
-            <defaultValue>Dear customer. Your order payment has been marked as cancelled. Best regards!</defaultValue>
-            <helpText>Defines the text content for payment cancellations.</helpText>
-            <helpText lang="de-DE">Definiert den SMS-Inhalt bei Zahlungsausfällen.</helpText>
+            <defaultValue>Dear customer. Your order payment has been marked as
+                cancelled. Best regards!
+            </defaultValue>
+            <helpText>Defines the text content for payment cancellations.
+            </helpText>
+            <helpText lang="de-DE">Definiert den SMS-Inhalt bei
+                Zahlungsausfällen.
+            </helpText>
             <copyable>true</copyable>
         </input-field>
 
@@ -237,8 +303,11 @@
             <label>Sender</label>
             <label lang="de-DE">Absenderkennung</label>
             <defaultValue>sms77io</defaultValue>
-            <helpText>Defines the sender name for transmitted messages.</helpText>
-            <helpText lang="de-DE">Definiert die Absenderkennung der übermittelten Nachrichten.</helpText>
+            <helpText>Defines the sender name for transmitted messages.
+            </helpText>
+            <helpText lang="de-DE">Definiert die Absenderkennung der
+                übermittelten Nachrichten.
+            </helpText>
             <copyable>true</copyable>
         </input-field>
 
@@ -248,7 +317,9 @@
             <label lang="de-DE">Signatur</label>
             <defaultValue/>
             <helpText>Text to add to every outgoing message.</helpText>
-            <helpText lang="de-DE">Text, welcher jeder ausgehenden Nachricht hinzugefügt wird.</helpText>
+            <helpText lang="de-DE">Text, welcher jeder ausgehenden Nachricht
+                hinzugefügt wird.
+            </helpText>
             <copyable>true</copyable>
         </input-field>
 
@@ -256,8 +327,11 @@
             <name>signaturePosition</name>
             <label>Signature Position</label>
             <label lang="de-DE">Signatur-Position</label>
-            <helpText>Defines where in the message to add the signature.</helpText>
-            <helpText lang="de-DE">Bestimmt, wo die Signatur in der Nachricht eingefügt wird.</helpText>
+            <helpText>Defines where in the message to add the signature.
+            </helpText>
+            <helpText lang="de-DE">Bestimmt, wo die Signatur in der Nachricht
+                eingefügt wird.
+            </helpText>
             <defaultValue>append</defaultValue>
             <options>
                 <option>

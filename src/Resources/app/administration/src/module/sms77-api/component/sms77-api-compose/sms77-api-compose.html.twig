@@ -35,12 +35,20 @@
 
                     <sw-text-field
                             v-bind='commonSettingAttrs("to")'
-                            required
-                            validation="required"
                             v-model='configuration.to'
                             v-tooltip="translateSettingTooltip('to')"
                     >
                     </sw-text-field>
+
+                    <sw-entity-multi-select
+                            @change="setCustomerGroupIds"
+                            entity="customer_group"
+                            :entityCollection="customerGroups"
+                            :label="translateSettingLabel('customerGroupIds')"
+                            v-if='null !== customerGroups'
+                            v-tooltip="translateSettingTooltip('customerGroupIds')"
+                    >
+                    </sw-entity-multi-select>
                 </div>
 
                 <div style='width: 50%; padding-left: 6px;'>

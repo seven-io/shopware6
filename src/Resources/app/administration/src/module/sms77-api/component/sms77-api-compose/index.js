@@ -1,11 +1,6 @@
 import template from './sms77-api-compose.html.twig';
 import {Sms77ApiMixin} from '../Sms77ApiMixin';
 
-const required = {
-    text: null,
-    to: null,
-};
-
 const strings = {
     delay: null,
     foreign_id: null,
@@ -30,42 +25,63 @@ const numbers = {
     ttl: null,
 };
 
-const component = {
+Shopware.Component.register('sms77-api-compose', {
+    computed: {
+        customerGroupRepository() {
+            return this.repositoryFactory.create('customer_group');
+        },
+
+        isDisabled() {
+            if ((!this.configuration.text || '').length) {
+                return true;
+            }
+
+            return !(this.configuration.to || '').length
+                && !(this.configuration.customerGroupIds || []).length;
+        },
+
+        customerRepository() {
+            return this.repositoryFactory.create('customer');
+        },
+    },
+
     async created() {
         this.systemConfig = await this.getSystemConfig();
 
         this.configuration.from = (this.systemConfig.from || '');
         this.configuration.text = this.addSignature('');
-    },
 
-    computed: {
-        isDisabled() {
-            return !((this.configuration.to || '').length
-                && (this.configuration.text || '').length);
-        }
-    },
-
-    optionalFields: {
-        booleans: Object.keys(booleans),
-        strings: Object.keys(strings),
-        numbers: Object.keys(numbers),
+        this.customerGroups = new Shopware.Data.EntityCollection(
+            this.customerGroupRepository.route,
+            this.customerGroupRepository.entityName,
+            Shopware.Context.api
+        );
     },
 
     data: () => ({
         configuration: {
-            ...required,
+            text: null,
+            to: null,
             ...strings,
             ...booleans,
             ...numbers,
+            customerGroupIds: null,
         },
+        customerGroups: null,
         info: null,
         isLoading: false,
     }),
 
     methods: {
+        setCustomerGroupIds(customerGroups) {
+            this.customerGroups = customerGroups;
+
+            this.configuration.customerGroupIds = this.customerGroups.getIds();
+        },
+
         commonSettingAttrs(name, placeholder = true) {
             const obj = {
-                label: this.translateSetting(name, 'label'),
+                label: this.translateSettingLabel(name),
                 name,
             };
 
@@ -89,15 +105,55 @@ const component = {
             return {message: this.translateSettingDesc(name)};
         },
 
+        translateSettingLabel(name) {
+            return this.translateSetting(name, 'label');
+        },
+
         translateSettingDesc(name) {
             return this.translateSetting(name, 'desc');
         },
 
-        async handleSubmit(ev) {
+        async handleSubmit() {
             this.isLoading = true;
 
-            await this.saveEntity(
-                this.createEntity(await this.sendSms(ev.target)));
+            if ((this.configuration.customerGroupIds || []).length) {
+                let phoneNumbers = [];
+
+                for (const customer of await this.customerRepository.search(
+                    new Shopware.Data.Criteria(1, 500)
+                        .addAssociation('addresses')
+                        .addFilter(Shopware.Data.Criteria.equals(
+                            'active', true))
+                        .addFilter(Shopware.Data.Criteria.equalsAny(
+                            'groupId', this.configuration.customerGroupIds)),
+                    Shopware.Context.api)) {
+                    let phone = null;
+
+                    for (const address of customer.addresses) {
+                        if ((address.phoneNumber || '').length) {
+                            phone = address.phoneNumber;
+
+                            if (customer.defaultShippingAddressId) {
+                                break;
+                            }
+
+                            break;
+                        }
+                    }
+
+                    if (phone) {
+                        phoneNumbers.push(phone);
+                    }
+                }
+
+                if (phoneNumbers.length) {
+                    this.configuration.to = phoneNumbers.join(',');
+                }
+            }
+
+            const response = await this.sendSms(this.configuration);
+            const entity = this.createEntity(response);
+            await this.saveEntity(entity);
 
             this.isLoading = false;
 
@@ -107,7 +163,11 @@ const component = {
 
     mixins: [Sms77ApiMixin,],
 
-    template,
-};
+    optionalFields: {
+        booleans: Object.keys(booleans),
+        numbers: Object.keys(numbers),
+        strings: Object.keys(strings),
+    },
 
-Shopware.Component.register('sms77-api-compose', component);
+    template,
+});
