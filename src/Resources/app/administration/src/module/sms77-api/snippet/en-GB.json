@@ -1,0 +1,85 @@
+{
+  "sms77-api": {
+    "navigation": "Sms77.io API",
+    "compose": {
+      "header": "Compose SMS",
+      "text": {
+        "label": "Text",
+        "desc": "The actual message content."
+      },
+      "from": {
+        "label": "From",
+        "desc": "Sender identifier"
+      },
+      "debug": {
+        "label": "Debug",
+        "desc": "Disable message dispatching?"
+      },
+      "to": {
+        "label": "To",
+        "desc": "Defines the recipient(s)."
+      },
+      "performance_tracking": {
+        "label": "Performance Tracking",
+        "desc": "Enable performance tracking for found URLs?"
+      },
+      "json": {
+        "label": "JSON",
+        "desc": "Return a detailed JSON response?"
+      },
+      "return_msg_id": {
+        "label": "Return MSG ID",
+        "desc": "Append the message ID to the status response? Has no effect if 'JSON' is set to true."
+      },
+      "details": {
+        "label": "Details",
+        "desc": "Return a detailed response? Has no effect if 'JSON' is set to true."
+      },
+      "utf8": {
+        "label": "UTF8",
+        "desc": "Ignore server detection and force UTF-8 character set?"
+      },
+      "flash": {
+        "label": "Flash",
+        "desc": "Dispatch as flash message(s)?"
+      },
+      "unicode": {
+        "label": "Unicode",
+        "desc": "Ignore server detection and force unicode transmission for Cyrillic, Arabic etc characters? The SMS length gets reduced to 70 characters."
+      },
+      "no_reload": {
+        "label": "No Reload",
+        "desc": "Switch off reload lock?"
+      },
+      "foreign_id": {
+        "label": "Foreign ID",
+        "desc": "Custom ID included in DLR callbacks etc. Max. 64 chars; allowed characters: a-z, A-Z, 0-9, .-_@"
+      },
+      "label": {
+        "label": "Label",
+        "desc": "Add a custom message label."
+      },
+      "ttl": {
+        "label": "TTL",
+        "desc": "Set a custom time to live."
+      },
+      "type": "Type",
+      "config": "Config",
+      "response": "Response",
+      "created": "Created",
+      "updated": "Updated",
+      "udh": {
+        "label": "UDH",
+        "desc": "Set a custom user data header."
+      },
+      "delay": {
+        "label": "Delay",
+        "desc": "Date/Timestamp for delayed dispatch. Accepts an UNIX timestamp or a date of format yyyy-mm-dd hh:ii eg. 1141511104 or 2016-03-04 23:25:04."
+      },
+      "submit": "Send Message"
+    },
+    "messages": {
+      "header": "Message History"
+    }
+  }
+}

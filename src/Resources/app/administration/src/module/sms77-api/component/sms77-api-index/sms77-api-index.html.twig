@@ -1,0 +1,27 @@
+{% block sms77_api_index %}
+    <sw-page>
+        <template slot="smart-bar-actions">
+            <sw-button
+                    :routerLink="{ name: 'sms77.api.compose' }"
+                    variant="primary"
+            >
+                {{ $tc('sms77-api.compose.header') }}
+            </sw-button>
+        </template>
+
+        <template slot="content">
+            <h2>{{ $tc('sms77-api.messages.header') }}</h2>
+
+            <sw-entity-listing
+                    :columns="columns"
+                    detailRoute="sw.mail.template.detail_head_foot"
+                    :isLoading="isLoading"
+                    :items="messages"
+                    :repository="repository"
+                    :showSelection="true"
+                    v-if="messages"
+            >
+            </sw-entity-listing>
+        </template>
+    </sw-page>
+{% endblock %}

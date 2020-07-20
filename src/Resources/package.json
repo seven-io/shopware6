@@ -1,0 +1,8 @@
+{
+  "private": true,
+  "name": "sms77-shopware6",
+  "version": "1.0.0",
+  "dependencies": {
+    "sms77-client": "^1.9.2"
+  }
+}

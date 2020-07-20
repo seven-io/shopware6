@@ -1,6 +1,4 @@
-<p align="center">
-<img src="https://www.sms77.io/wp-content/uploads/2019/07/sms77-Logo-400x79.png" alt="" />
-</p>
+![Sms77.io Logo](https://www.sms77.io/wp-content/uploads/2019/07/sms77-Logo-400x79.png "sms77")
 
 # sms77io plugin for Shopware 6
 
@@ -9,6 +7,7 @@
 <li>Open a shell and navigate to the Shopware installation directory</li>
 <li>Run <code>composer require sms77/shopware6</code></li>
 <li>Run <code>php bin/console cache:clear</code></li>
+<li>Run <code>php bin/console database:migrate --all Sms77Shopware6</code></li>
 <li>Navigate to Administration -&gt; Settings -&gt; System -&gt; Plugins -&gt; sms77io</li>
 <li>Enter and save the required API key</li>
 </ol>
@@ -37,6 +36,3 @@
 <li>Partial payment refund</li>
 <li>Payment reminder</li>
 </ul>
-
-#### ToDo
-- Tests

@@ -1,0 +1,8 @@
+{% sw_extends 'administration/index.html.twig' %}
+
+{% block administration_scripts %}
+    {{ parent() }}
+
+    <script type="text/javascript"
+            src="{{ asset('bundles/sms77shopware6/administration/js/sms77-shopware6.js') }}"></script>
+{% endblock %}

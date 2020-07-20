@@ -19,13 +19,20 @@
         </service>
 
         <service id="Sms77\Shopware6\Logger" class="Monolog\Logger">
-            <factory service="Shopware\Core\Framework\Log\LoggerFactory" method="createRotating"/>
+            <factory service="Shopware\Core\Framework\Log\LoggerFactory"
+                     method="createRotating"/>
 
             <argument type="string">sms77_shopware6</argument>
         </service>
 
-        <service id="Sms77\Shopware6\Configuration" class="Sms77\Shopware6\Library\Configuration">
-            <argument type="service" id="Shopware\Core\System\SystemConfig\SystemConfigService"/>
+        <service id="Sms77\Shopware6\Configuration"
+                 class="Sms77\Shopware6\Library\Configuration">
+            <argument type="service"
+                      id="Shopware\Core\System\SystemConfig\SystemConfigService"/>
+        </service>
+
+        <service id="Sms77\Shopware6\Core\Content\Message\MessageDefinition">
+            <tag name="shopware.entity.definition" entity="sms77_message"/>
         </service>
     </services>
 </container>
