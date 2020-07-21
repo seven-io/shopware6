@@ -1,7 +1,7 @@
 {% block sms77_api_compose %}
     <sw-page>
         <template slot="smart-bar-header">
-            <h2>{{ $tc('sms77-api.compose.header') }}</h2>
+            <h2>{{ $t('sms77-api.compose.header') }}</h2>
         </template>
 
         <template slot="smart-bar-actions">
@@ -11,7 +11,7 @@
                     :isLoading="isLoading"
                     variant="primary"
             >
-                {{ $tc('sms77-api.compose.submit') }}
+                {{ $t('sms77-api.compose.submit') }}
             </sw-button>
         </template>
 
@@ -25,17 +25,19 @@
                   @submit.prevent="handleSubmit">
                 <div style='width: 50%; padding-right: 6px;'>
                     <sw-textarea-field
-                            v-bind='commonSettingAttrs("text")'
                             required
-                            validation="required"
                             type="textarea"
-                            v-model="configuration.text"
+                            validation="required"
+                            v-bind='commonSettingAttrs("text")'
+                            v-model="configuration.smsParams.text"
                             v-tooltip="translateSettingTooltip('text')"
                     ></sw-textarea-field>
 
+                    <p>{{ $t('sms77-api.compose.intro') }}</p>
+
                     <sw-text-field
                             v-bind='commonSettingAttrs("to")'
-                            v-model='configuration.to'
+                            v-model='configuration.smsParams.to'
                             v-tooltip="translateSettingTooltip('to')"
                     >
                     </sw-text-field>
@@ -44,30 +46,44 @@
                             @change="setCustomerGroupIds"
                             entity="customer_group"
                             :entityCollection="customerGroups"
-                            :label="translateSettingLabel('customerGroupIds')"
+                            :label="translateSettingLabel('customer.groupIds')"
                             v-if='null !== customerGroups'
-                            v-tooltip="translateSettingTooltip('customerGroupIds')"
+                            v-tooltip="translateSettingTooltip('customer.groupIds')"
                     >
                     </sw-entity-multi-select>
+
+                    <sw-switch-field
+                            v-bind='commonSettingAttrs("onlyActiveCustomers")'
+                            v-model='configuration.onlyActiveCustomers'
+                            v-tooltip='translateSettingTooltip("onlyActiveCustomers")'
+                    ></sw-switch-field>
+
+                    <sw-number-field
+                            :min='0'
+                            numberType='int'
+                            v-bind='commonSettingAttrs("customer.limit", false)'
+                            v-model='configuration.customerLimit'
+                            v-tooltip='translateSettingTooltip("customer.limit")'
+                    ></sw-number-field>
                 </div>
 
                 <div style='width: 50%; padding-left: 6px;'>
                     <sw-number-field
-                            :key="name"
-                            :min="0"
-                            numberType="int"
+                            :key='name'
+                            :min='0'
+                            numberType='int'
                             v-bind='commonSettingAttrs(name, false)'
-                            v-for="name in $options.optionalFields.numbers"
-                            v-model='configuration[name]'
-                            v-tooltip="translateSettingTooltip(name)"
+                            v-for='name in $options.optionalFields.numbers'
+                            v-model='configuration.smsParams[name]'
+                            v-tooltip='translateSettingTooltip(name)'
                     >
                     </sw-number-field>
 
                     <sw-text-field
-                            :key="name"
+                            :key='name'
                             v-bind='commonSettingAttrs(name)'
-                            v-for="name in $options.optionalFields.strings"
-                            v-model.trim="configuration[name]"
+                            v-for='name in $options.optionalFields.strings'
+                            v-model.trim='configuration.smsParams[name]'
                             v-tooltip="translateSettingTooltip(name)"
                     ></sw-text-field>
 
@@ -75,7 +91,7 @@
                             :key="name"
                             v-bind='commonSettingAttrs(name)'
                             v-for="name in $options.optionalFields.booleans"
-                            v-model="configuration[name]"
+                            v-model="configuration.smsParams[name]"
                             v-tooltip="translateSettingTooltip(name)"
                     ></sw-switch-field>
                 </div>

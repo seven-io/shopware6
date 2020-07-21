@@ -32,24 +32,28 @@ Shopware.Component.register('sms77-api-compose', {
         },
 
         isDisabled() {
-            if ((!this.configuration.text || '').length) {
+            if ((!this.configuration.smsParams.text || '').length) {
                 return true;
             }
 
-            return !(this.configuration.to || '').length
-                && !(this.configuration.customerGroupIds || []).length;
+            return !(this.configuration.smsParams.to || '').length
+                && !this.hasCustomerGroups;
         },
 
         customerRepository() {
             return this.repositoryFactory.create('customer');
+        },
+
+        hasCustomerGroups() {
+            return (this.configuration.customerGroupIds || []).length;
         },
     },
 
     async created() {
         this.systemConfig = await this.getSystemConfig();
 
-        this.configuration.from = (this.systemConfig.from || '');
-        this.configuration.text = this.addSignature('');
+        this.configuration.smsParams.from = (this.systemConfig.from || '');
+        this.configuration.smsParams.text = this.addSignature('');
 
         this.customerGroups = new Shopware.Data.EntityCollection(
             this.customerGroupRepository.route,
@@ -60,12 +64,16 @@ Shopware.Component.register('sms77-api-compose', {
 
     data: () => ({
         configuration: {
-            text: null,
-            to: null,
-            ...strings,
-            ...booleans,
-            ...numbers,
             customerGroupIds: null,
+            customerLimit: 500,
+            onlyActiveCustomers: true,
+            smsParams: {
+                text: null,
+                to: null,
+                ...strings,
+                ...booleans,
+                ...numbers,
+            },
         },
         customerGroups: null,
         info: null,
@@ -93,8 +101,8 @@ Shopware.Component.register('sms77-api-compose', {
         },
 
         filterByType(type) {
-            return Object.keys(this.configuration)
-                .filter(key => typeof this.configuration[key] === type);
+            return Object.keys(this.configuration.smsParams)
+                .filter(key => typeof this.configuration.smsParams[key] === type);
         },
 
         translateSetting(name, key) {
@@ -113,20 +121,54 @@ Shopware.Component.register('sms77-api-compose', {
             return this.translateSetting(name, 'desc');
         },
 
+        defaultCriteria() {
+            return new Shopware.Data.Criteria(1, this.customerLimit)
+                .addAssociation('addresses');
+        },
+
+        filterActive() {
+            return Shopware.Data.Criteria.equals(
+                'active', 1);
+        },
+
+        filterGroupId() {
+            return Shopware.Data.Criteria.equalsAny(
+                'groupId', this.configuration.customerGroupIds || []);
+        },
+
+        getFilters() {
+            const filters = [];
+
+            if (this.configuration.onlyActiveCustomers) {
+                filters.push(this.filterActive());
+            }
+
+            if (this.hasCustomerGroups) {
+                filters.push(this.filterGroupId());
+            }
+
+            return filters;
+        },
+
+        async searchCustomers(filters) {
+            const criteria = this.defaultCriteria();
+
+            for (const filter of filters || []) {
+                criteria.addFilter(filter);
+            }
+
+            return await this.customerRepository.search(criteria, Shopware.Context.api);
+        },
+
         async handleSubmit() {
+            const params = {...this.configuration.smsParams};
+
             this.isLoading = true;
 
-            if ((this.configuration.customerGroupIds || []).length) {
+            if (this.hasCustomerGroups) {
                 let phoneNumbers = [];
 
-                for (const customer of await this.customerRepository.search(
-                    new Shopware.Data.Criteria(1, 500)
-                        .addAssociation('addresses')
-                        .addFilter(Shopware.Data.Criteria.equals(
-                            'active', true))
-                        .addFilter(Shopware.Data.Criteria.equalsAny(
-                            'groupId', this.configuration.customerGroupIds)),
-                    Shopware.Context.api)) {
+                for (const customer of await this.searchCustomers(this.getFilters())) {
                     let phone = null;
 
                     for (const address of customer.addresses) {
@@ -147,11 +189,11 @@ Shopware.Component.register('sms77-api-compose', {
                 }
 
                 if (phoneNumbers.length) {
-                    this.configuration.to = phoneNumbers.join(',');
+                    params.to = phoneNumbers.join(',');
                 }
             }
 
-            const response = await this.sendSms(this.configuration);
+            const response = await this.sendSms(params);
             const entity = this.createEntity(response);
             await this.saveEntity(entity);
 

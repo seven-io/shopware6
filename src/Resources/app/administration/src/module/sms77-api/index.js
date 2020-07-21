@@ -3,28 +3,25 @@ import './component/sms77-api-index';
 
 import snippets from './snippet';
 
-const name = 'sms77-api';
-
-Shopware.Module.register(name, {
-    color: '#ff3d58',
+Shopware.Module.register('sms77-api', {
+    color: '#00d46a',
     description: 'Send SMS via the sms77io SMS gateway.',
-    icon: 'default-shopping-paper-bag-product',
-    name,
+    icon: 'default-communication-envelope',
     navigation: [{
-        color: '#ff3d58',
-        icon: 'default-shopping-paper-bag-product',
+        color: '#00d46a',
+        icon: 'default-communication-envelope',
         label: 'sms77-api.navigation',
         parent: 'sw-marketing',
         path: 'sms77.api.index',
     }],
     routes: {
-        index: {
-            component: 'sms77-api-index',
-            path: 'index',
-        },
         compose: {
             component: 'sms77-api-compose',
             path: 'compose',
+        },
+        index: {
+            component: 'sms77-api-index',
+            path: 'index',
         },
     },
     snippets,
