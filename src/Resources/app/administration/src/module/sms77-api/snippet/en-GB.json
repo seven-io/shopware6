@@ -6,7 +6,10 @@
             "intro": "If both 'To' and 'Customer Groups' are omitted, the 'Text' gets sent to all (active) customers.",
             "text": {
                 "label": "Text",
-                "desc": "The actual message content."
+                "desc": "The actual message content.",
+                "error": {
+                    "empty": "No text given. Cannot send an empty message."
+                }
             },
             "from": {
                 "label": "From",
@@ -15,11 +18,15 @@
             "customer": {
                 "groupIds": {
                     "label": "Customer Groups",
-                    "desc": "If set, the message gets sent to all enabled users from the selected group(s). Uses 'to' as fallback."
+                    "desc": "If set, the message gets sent to all (active) users from the selected group(s). Uses 'to' as fallback."
                 },
                 "limit": {
                     "label": "Customer Limit",
                     "desc": "Max amount of customers per batch."
+                },
+                "salesChannelIds": {
+                    "label": "Sales Channels",
+                    "desc": "If set, the message gets sent to all (active) users from the selected sales channel(s)."
                 }
             },
             "debug": {
@@ -28,7 +35,10 @@
             },
             "to": {
                 "label": "To",
-                "desc": "Defines the recipient(s)."
+                "desc": "Defines the recipient(s).",
+                "error": {
+                    "empty": "No recipient(s) found. Cannot send message without."
+                }
             },
             "performance_tracking": {
                 "label": "Performance Tracking",

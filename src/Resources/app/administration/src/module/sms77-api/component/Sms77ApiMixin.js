@@ -6,7 +6,8 @@ export const Sms77ApiMixin = {
     inject: ['repositoryFactory'],
 
     mounted() {
-        document.querySelector('.sw-desktop__content').style.overflow = 'scroll'; //TODO wait merge https://github.com/shopware/platform/pull/1137
+        //TODO wait merge https://github.com/shopware/platform/pull/1137
+        document.querySelector('.sw-desktop__content').style.overflow = 'scroll';
     },
 
     data: () => ({
@@ -57,6 +58,14 @@ export const Sms77ApiMixin = {
             }
 
             return config;
+        },
+
+        repoToCollection(repository) {
+            return new Shopware.Data.EntityCollection(
+                repository.route,
+                repository.entityName,
+                Shopware.Context.api
+            );
         },
 
         async sendSms(config) {

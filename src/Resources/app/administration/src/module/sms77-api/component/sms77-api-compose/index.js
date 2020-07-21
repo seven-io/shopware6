@@ -1,34 +1,22 @@
 import template from './sms77-api-compose.html.twig';
 import {Sms77ApiMixin} from '../Sms77ApiMixin';
 
-const strings = {
-    delay: null,
-    foreign_id: null,
-    from: null,
-    label: null,
-    udh: null,
-};
-
-const booleans = {
-    debug: false,
-    details: false,
-    flash: false,
-    json: false,
-    no_reload: false,
-    performance_tracking: false,
-    return_msg_id: false,
-    unicode: false,
-    utf8: false,
-};
-
-const numbers = {
-    ttl: null,
-};
-
 Shopware.Component.register('sms77-api-compose', {
     computed: {
         customerGroupRepository() {
             return this.repositoryFactory.create('customer_group');
+        },
+
+        customerRepository() {
+            return this.repositoryFactory.create('customer');
+        },
+
+        hasCustomerGroups() {
+            return (this.configuration.customerGroupIds || []).length;
+        },
+
+        hasSalesChannels() {
+            return (this.configuration.salesChannelIds || []).length;
         },
 
         isDisabled() {
@@ -40,12 +28,8 @@ Shopware.Component.register('sms77-api-compose', {
                 && !this.hasCustomerGroups;
         },
 
-        customerRepository() {
-            return this.repositoryFactory.create('customer');
-        },
-
-        hasCustomerGroups() {
-            return (this.configuration.customerGroupIds || []).length;
+        salesChannelRepository() {
+            return this.repositoryFactory.create('sales_channel');
         },
     },
 
@@ -55,11 +39,8 @@ Shopware.Component.register('sms77-api-compose', {
         this.configuration.smsParams.from = (this.systemConfig.from || '');
         this.configuration.smsParams.text = this.addSignature('');
 
-        this.customerGroups = new Shopware.Data.EntityCollection(
-            this.customerGroupRepository.route,
-            this.customerGroupRepository.entityName,
-            Shopware.Context.api
-        );
+        this.customerGroups = this.repoToCollection(this.customerGroupRepository);
+        this.salesChannels = this.repoToCollection(this.salesChannelRepository);
     },
 
     data: () => ({
@@ -67,26 +48,34 @@ Shopware.Component.register('sms77-api-compose', {
             customerGroupIds: null,
             customerLimit: 500,
             onlyActiveCustomers: true,
+            salesChannelIds: null,
             smsParams: {
                 text: null,
                 to: null,
-                ...strings,
-                ...booleans,
-                ...numbers,
+                delay: null,
+                foreign_id: null,
+                from: null,
+                label: null,
+                udh: null,
+                debug: false,
+                details: false,
+                flash: false,
+                json: false,
+                no_reload: false,
+                performance_tracking: false,
+                return_msg_id: false,
+                unicode: false,
+                utf8: false,
+                ttl: null,
             },
         },
         customerGroups: null,
         info: null,
         isLoading: false,
+        salesChannels: null,
     }),
 
     methods: {
-        setCustomerGroupIds(customerGroups) {
-            this.customerGroups = customerGroups;
-
-            this.configuration.customerGroupIds = this.customerGroups.getIds();
-        },
-
         commonSettingAttrs(name, placeholder = true) {
             const obj = {
                 label: this.translateSettingLabel(name),
@@ -100,27 +89,6 @@ Shopware.Component.register('sms77-api-compose', {
             return obj;
         },
 
-        filterByType(type) {
-            return Object.keys(this.configuration.smsParams)
-                .filter(key => typeof this.configuration.smsParams[key] === type);
-        },
-
-        translateSetting(name, key) {
-            return this.$tc(`sms77-api.compose.${name}.${key}`);
-        },
-
-        translateSettingTooltip(name) {
-            return {message: this.translateSettingDesc(name)};
-        },
-
-        translateSettingLabel(name) {
-            return this.translateSetting(name, 'label');
-        },
-
-        translateSettingDesc(name) {
-            return this.translateSetting(name, 'desc');
-        },
-
         defaultCriteria() {
             return new Shopware.Data.Criteria(1, this.customerLimit)
                 .addAssociation('addresses');
@@ -131,9 +99,16 @@ Shopware.Component.register('sms77-api-compose', {
                 'active', 1);
         },
 
+        filterEqualsAny(prop, arr) {
+            return Shopware.Data.Criteria.equalsAny(prop, arr || []);
+        },
+
         filterGroupId() {
-            return Shopware.Data.Criteria.equalsAny(
-                'groupId', this.configuration.customerGroupIds || []);
+            return this.filterEqualsAny('groupId', this.configuration.customerGroupIds);
+        },
+
+        filterSalesChannelId() {
+            return this.filterEqualsAny('salesChannelId', this.configuration.salesChannelIds);
         },
 
         getFilters() {
@@ -147,20 +122,15 @@ Shopware.Component.register('sms77-api-compose', {
                 filters.push(this.filterGroupId());
             }
 
+            if (this.hasSalesChannels) {
+                filters.push(this.filterSalesChannelId());
+            }
+
             return filters;
         },
 
-        async searchCustomers(filters) {
-            const criteria = this.defaultCriteria();
-
-            for (const filter of filters || []) {
-                criteria.addFilter(filter);
-            }
-
-            return await this.customerRepository.search(criteria, Shopware.Context.api);
-        },
-
         async handleSubmit() {
+            const errors = [];
             const params = {...this.configuration.smsParams};
 
             this.isLoading = true;
@@ -193,6 +163,20 @@ Shopware.Component.register('sms77-api-compose', {
                 }
             }
 
+            if (!(params.to || '').length) {
+                errors.push(this.$t('sms77-api.compose.to.error.empty'));
+            }
+
+            if (!(params.text || '').length) {
+                errors.push(this.$t('sms77-api.compose.text.error.empty'));
+            }
+
+            if (errors.length) {
+                return this.createNotificationError({
+                    message: errors.join(' '),
+                });
+            }
+
             const response = await this.sendSms(params);
             const entity = this.createEntity(response);
             await this.saveEntity(entity);
@@ -201,15 +185,47 @@ Shopware.Component.register('sms77-api-compose', {
 
             this.$router.push({name: 'sms77.api.index',});
         },
+
+        async searchCustomers(filters) {
+            const criteria = this.defaultCriteria();
+
+            for (const filter of filters || []) {
+                criteria.addFilter(filter);
+            }
+
+            return await this.customerRepository.search(criteria, Shopware.Context.api);
+        },
+
+        setCustomerGroupIds(customerGroups) {
+            this.customerGroups = customerGroups;
+
+            this.configuration.customerGroupIds = this.customerGroups.getIds();
+        },
+
+        setSalesChannelIds(salesChannels) {
+            this.salesChannels = salesChannels;
+
+            this.configuration.salesChannelIds = this.salesChannels.getIds();
+        },
+
+        translateSetting(name, key) {
+            return this.$t(`sms77-api.compose.${name}.${key}`);
+        },
+
+        translateSettingDesc(name) {
+            return this.translateSetting(name, 'desc');
+        },
+
+        translateSettingLabel(name) {
+            return this.translateSetting(name, 'label');
+        },
+
+        translateSettingTooltip(name) {
+            return {message: this.translateSettingDesc(name)};
+        },
     },
 
-    mixins: [Sms77ApiMixin,],
-
-    optionalFields: {
-        booleans: Object.keys(booleans),
-        numbers: Object.keys(numbers),
-        strings: Object.keys(strings),
-    },
+    mixins: [Sms77ApiMixin, Shopware.Mixin.getByName('notification')],
 
     template,
 });

@@ -52,11 +52,15 @@
                     >
                     </sw-entity-multi-select>
 
-                    <sw-switch-field
-                            v-bind='commonSettingAttrs("onlyActiveCustomers")'
-                            v-model='configuration.onlyActiveCustomers'
-                            v-tooltip='translateSettingTooltip("onlyActiveCustomers")'
-                    ></sw-switch-field>
+                    <sw-entity-multi-select
+                            @change="setSalesChannelIds"
+                            entity="sales_channel"
+                            :entityCollection="salesChannels"
+                            :label="translateSettingLabel('customer.salesChannelIds')"
+                            v-if='null !== salesChannels'
+                            v-tooltip="translateSettingTooltip('customer.salesChannelIds')"
+                    >
+                    </sw-entity-multi-select>
 
                     <sw-number-field
                             :min='0'
@@ -65,34 +69,106 @@
                             v-model='configuration.customerLimit'
                             v-tooltip='translateSettingTooltip("customer.limit")'
                     ></sw-number-field>
+
+                    <sw-switch-field
+                            v-bind='commonSettingAttrs("onlyActiveCustomers")'
+                            v-model='configuration.onlyActiveCustomers'
+                            v-tooltip='translateSettingTooltip("onlyActiveCustomers")'
+                    ></sw-switch-field>
                 </div>
 
                 <div style='width: 50%; padding-left: 6px;'>
                     <sw-number-field
-                            :key='name'
                             :min='0'
                             numberType='int'
-                            v-bind='commonSettingAttrs(name, false)'
-                            v-for='name in $options.optionalFields.numbers'
-                            v-model='configuration.smsParams[name]'
-                            v-tooltip='translateSettingTooltip(name)'
+                            v-bind='commonSettingAttrs("ttl", false)'
+                            v-model='configuration.smsParams.ttl'
+                            v-tooltip='translateSettingTooltip("ttl")'
                     >
                     </sw-number-field>
 
                     <sw-text-field
-                            :key='name'
-                            v-bind='commonSettingAttrs(name)'
-                            v-for='name in $options.optionalFields.strings'
-                            v-model.trim='configuration.smsParams[name]'
-                            v-tooltip="translateSettingTooltip(name)"
+                            v-bind='commonSettingAttrs("delay")'
+                            v-model.trim='configuration.smsParams.delay'
+                            v-tooltip='translateSettingTooltip("delay")'
+                    ></sw-text-field>
+
+                    <sw-text-field
+                            v-bind='commonSettingAttrs("foreign_id")'
+                            v-model.trim='configuration.smsParams.foreign_id'
+                            v-tooltip='translateSettingTooltip("foreign_id")'
+                    ></sw-text-field>
+
+                    <sw-text-field
+                            v-bind='commonSettingAttrs("from")'
+                            v-model.trim='configuration.smsParams.from'
+                            v-tooltip='translateSettingTooltip("from")'
+                    ></sw-text-field>
+
+                    <sw-text-field
+                            v-bind='commonSettingAttrs("label")'
+                            v-model.trim='configuration.smsParams.label'
+                            v-tooltip='translateSettingTooltip("label")'
+                    ></sw-text-field>
+
+                    <sw-text-field
+                            v-bind='commonSettingAttrs("udh")'
+                            v-model.trim='configuration.smsParams.udh'
+                            v-tooltip='translateSettingTooltip("udh")'
                     ></sw-text-field>
 
                     <sw-switch-field
-                            :key="name"
-                            v-bind='commonSettingAttrs(name)'
-                            v-for="name in $options.optionalFields.booleans"
-                            v-model="configuration.smsParams[name]"
-                            v-tooltip="translateSettingTooltip(name)"
+                            v-bind='commonSettingAttrs("debug")'
+                            v-model='configuration.smsParams.debug'
+                            v-tooltip='translateSettingTooltip("debug")'
+                    ></sw-switch-field>
+
+                    <sw-switch-field
+                            v-bind='commonSettingAttrs("details")'
+                            v-model='configuration.smsParams.details'
+                            v-tooltip='translateSettingTooltip("details")'
+                    ></sw-switch-field>
+
+                    <sw-switch-field
+                            v-bind='commonSettingAttrs("flash")'
+                            v-model='configuration.smsParams.flash'
+                            v-tooltip='translateSettingTooltip("flash")'
+                    ></sw-switch-field>
+
+                    <sw-switch-field
+                            v-bind='commonSettingAttrs("json")'
+                            v-model='configuration.smsParams.json'
+                            v-tooltip='translateSettingTooltip("json")'
+                    ></sw-switch-field>
+
+                    <sw-switch-field
+                            v-bind='commonSettingAttrs("no_reload")'
+                            v-model='configuration.smsParams.no_reload'
+                            v-tooltip='translateSettingTooltip("no_reload")'
+                    ></sw-switch-field>
+
+                    <sw-switch-field
+                            v-bind='commonSettingAttrs("performance_tracking")'
+                            v-model='configuration.smsParams.performance_tracking'
+                            v-tooltip='translateSettingTooltip("performance_tracking")'
+                    ></sw-switch-field>
+
+                    <sw-switch-field
+                            v-bind='commonSettingAttrs("return_msg_id")'
+                            v-model='configuration.smsParams.return_msg_id'
+                            v-tooltip='translateSettingTooltip("return_msg_id")'
+                    ></sw-switch-field>
+
+                    <sw-switch-field
+                            v-bind='commonSettingAttrs("unicode")'
+                            v-model='configuration.smsParams.unicode'
+                            v-tooltip='translateSettingTooltip("unicode")'
+                    ></sw-switch-field>
+
+                    <sw-switch-field
+                            v-bind='commonSettingAttrs("utf8")'
+                            v-model='configuration.smsParams.utf8'
+                            v-tooltip='translateSettingTooltip("utf8")'
                     ></sw-switch-field>
                 </div>
             </form>
