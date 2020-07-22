@@ -2,52 +2,61 @@ import template from './sms77-api-index.html.twig';
 import {Sms77ApiMixin} from '../Sms77ApiMixin';
 
 const component = {
-    mixins: [Sms77ApiMixin,],
-
-    async created() {
-        await this.setMessages();
-    },
-
     columns: [
         {
-            property: 'type',
+            allowResize: true,
             dataIndex: 'type',
             label: 'sms77-api.compose.type',
-            allowResize: true,
             primary: true,
+            property: 'type',
         },
         {
-            property: 'config',
+            allowResize: true,
             dataIndex: 'config',
             label: 'sms77-api.compose.config',
-            allowResize: true,
+            property: 'config',
             sortable: false,
         },
         {
-            property: 'response',
+            allowResize: true,
             dataIndex: 'response',
             label: 'sms77-api.compose.response',
-            allowResize: true,
+            property: 'response',
         },
         {
-            property: 'created_at',
+            allowResize: true,
             dataIndex: 'created_at',
             label: 'sms77-api.compose.created',
-            allowResize: true,
+            property: 'created_at',
         },
         {
-            property: 'updated_at',
+            allowResize: true,
             dataIndex: 'updated_at',
             label: 'sms77-api.compose.updated',
-            allowResize: true,
+            property: 'updated_at',
         },
     ],
+
+    async created() {
+        this.systemConfig = await this.getSystemConfig();
+
+        this.messages = await this.findAllMessages();
+    },
 
     data: () => ({
         isLoading: false,
         messages: null,
-        repository: null,
     }),
+
+    methods: {
+        async resend(msg) {
+            await this.sendSms(msg.config);
+
+            this.$router.go();
+        }
+    },
+
+    mixins: [Sms77ApiMixin,],
 
     template,
 };

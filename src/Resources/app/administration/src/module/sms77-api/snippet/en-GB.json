@@ -104,7 +104,8 @@
             "submit": "Send Message"
         },
         "messages": {
-            "header": "Message History"
+            "header": "Message History",
+            "resend": "Resend"
         }
     }
 }

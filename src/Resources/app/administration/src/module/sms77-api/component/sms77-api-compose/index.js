@@ -36,11 +36,11 @@ Shopware.Component.register('sms77-api-compose', {
     async created() {
         this.systemConfig = await this.getSystemConfig();
 
-        this.configuration.smsParams.from = (this.systemConfig.from || '');
-        this.configuration.smsParams.text = this.addSignature('');
-
         this.customerGroups = this.repoToCollection(this.customerGroupRepository);
         this.salesChannels = this.repoToCollection(this.salesChannelRepository);
+
+        this.configuration.smsParams.from = (this.systemConfig.from || '');
+        this.configuration.smsParams.text = this.addSignature('');
     },
 
     data: () => ({
@@ -177,9 +177,7 @@ Shopware.Component.register('sms77-api-compose', {
                 });
             }
 
-            const response = await this.sendSms(params);
-            const entity = this.createEntity(response);
-            await this.saveEntity(entity);
+            await this.sendSms(params);
 
             this.isLoading = false;
 

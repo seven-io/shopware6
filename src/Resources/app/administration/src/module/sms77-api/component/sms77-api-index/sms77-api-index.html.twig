@@ -5,22 +5,26 @@
                     :routerLink="{ name: 'sms77.api.compose' }"
                     variant="primary"
             >
-                {{ $tc('sms77-api.compose.header') }}
+                {{ $t('sms77-api.compose.header') }}
             </sw-button>
         </template>
 
         <template slot="content">
-            <h2>{{ $tc('sms77-api.messages.header') }}</h2>
+            <h2>{{ $t('sms77-api.messages.header') }}</h2>
 
             <sw-entity-listing
                     :columns="$options.columns"
-                    detailRoute="sw.mail.template.detail_head_foot"
                     :isLoading="isLoading"
                     :items="messages"
-                    :repository="repository"
+                    :repository="messageRepository"
                     :showSelection="true"
                     v-if="messages"
             >
+                <template slot="more-actions" slot-scope="{ item }">
+                    <sw-context-menu-item @click="resend(item)">
+                        {{ $t('sms77-api.messages.resend') }}
+                    </sw-context-menu-item>
+                </template>
             </sw-entity-listing>
         </template>
     </sw-page>
