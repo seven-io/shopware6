@@ -38,6 +38,8 @@ const component = {
     ],
 
     async created() {
+        this.messageRepository = this.repositoryFactory.create('sms77_message');
+
         this.systemConfig = await this.getSystemConfig();
 
         this.messages = await this.findAllMessages();
@@ -45,6 +47,7 @@ const component = {
 
     data: () => ({
         isLoading: false,
+        messageRepository: null,
         messages: null,
     }),
 

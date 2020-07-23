@@ -3,7 +3,7 @@
         "navigation": "Sms77.io API",
         "compose": {
             "header": "Compose SMS",
-            "intro": "If both 'To' and 'Customer Groups' are omitted, the 'Text' gets sent to all (active) customers.",
+            "intro": "If no filter is set and 'To' is left empty, the 'Text' gets sent to all (active) customers.",
             "text": {
                 "label": "Text",
                 "desc": "The actual message content.",
@@ -16,6 +16,10 @@
                 "desc": "Sender identifier"
             },
             "customer": {
+                "countryIds": {
+                    "label": "Countries",
+                    "desc": "If set, message sending is limited to customers from the selected countries."
+                },
                 "groupIds": {
                     "label": "Customer Groups",
                     "desc": "If set, the message gets sent to all (active) users from the selected group(s). Uses 'to' as fallback."

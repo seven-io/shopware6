@@ -1,14 +1,23 @@
 import template from './sms77-api-compose.html.twig';
 import {Sms77ApiMixin} from '../Sms77ApiMixin';
+import {getCustomerPhones} from '../../util';
 
 Shopware.Component.register('sms77-api-compose', {
     computed: {
-        customerGroupRepository() {
-            return this.repositoryFactory.create('customer_group');
+        countryRepository() {
+            return this.repositoryFactory.create('country');
         },
 
         customerRepository() {
             return this.repositoryFactory.create('customer');
+        },
+
+        customerGroupRepository() {
+            return this.repositoryFactory.create('customer_group');
+        },
+
+        hasCountries() {
+            return (this.configuration.countryIds || []).length;
         },
 
         hasCustomerGroups() {
@@ -25,7 +34,9 @@ Shopware.Component.register('sms77-api-compose', {
             }
 
             return !(this.configuration.smsParams.to || '').length
-                && !this.hasCustomerGroups;
+                && !this.hasCountries
+                && !this.hasCustomerGroups
+                && !this.hasSalesChannels;
         },
 
         salesChannelRepository() {
@@ -36,6 +47,7 @@ Shopware.Component.register('sms77-api-compose', {
     async created() {
         this.systemConfig = await this.getSystemConfig();
 
+        this.countries = this.repoToCollection(this.countryRepository);
         this.customerGroups = this.repoToCollection(this.customerGroupRepository);
         this.salesChannels = this.repoToCollection(this.salesChannelRepository);
 
@@ -45,13 +57,12 @@ Shopware.Component.register('sms77-api-compose', {
 
     data: () => ({
         configuration: {
+            countryIds: null,
             customerGroupIds: null,
             customerLimit: 500,
             onlyActiveCustomers: true,
             salesChannelIds: null,
             smsParams: {
-                text: null,
-                to: null,
                 delay: null,
                 foreign_id: null,
                 from: null,
@@ -66,9 +77,12 @@ Shopware.Component.register('sms77-api-compose', {
                 return_msg_id: false,
                 unicode: false,
                 utf8: false,
+                text: null,
+                to: null,
                 ttl: null,
             },
         },
+        countries: null,
         customerGroups: null,
         info: null,
         isLoading: false,
@@ -89,77 +103,38 @@ Shopware.Component.register('sms77-api-compose', {
             return obj;
         },
 
-        defaultCriteria() {
-            return new Shopware.Data.Criteria(1, this.customerLimit)
-                .addAssociation('addresses');
-        },
+        async handleSubmit() {
+            this.isLoading = true;
 
-        filterActive() {
-            return Shopware.Data.Criteria.equals(
-                'active', 1);
-        },
-
-        filterEqualsAny(prop, arr) {
-            return Shopware.Data.Criteria.equalsAny(prop, arr || []);
-        },
-
-        filterGroupId() {
-            return this.filterEqualsAny('groupId', this.configuration.customerGroupIds);
-        },
-
-        filterSalesChannelId() {
-            return this.filterEqualsAny('salesChannelId', this.configuration.salesChannelIds);
-        },
-
-        getFilters() {
+            const params = {...this.configuration.smsParams};
+            const errors = [];
             const filters = [];
 
             if (this.configuration.onlyActiveCustomers) {
-                filters.push(this.filterActive());
+                filters.push(Shopware.Data.Criteria.equals(
+                    'active', 1));
             }
 
             if (this.hasCustomerGroups) {
-                filters.push(this.filterGroupId());
+                filters.push(Shopware.Data.Criteria.equalsAny(
+                    'groupId', this.configuration.customerGroupIds));
             }
 
             if (this.hasSalesChannels) {
-                filters.push(this.filterSalesChannelId());
+                filters.push(Shopware.Data.Criteria.equalsAny(
+                    'salesChannelId', this.configuration.salesChannelIds));
             }
 
-            return filters;
-        },
+            if (this.hasCountries) {
+                filters.push(Shopware.Data.Criteria.equalsAny(
+                    'addresses.countryId', this.configuration.countryIds));
+            }
 
-        async handleSubmit() {
-            const errors = [];
-            const params = {...this.configuration.smsParams};
+            if (filters.length || !(params.to || '').length) {
+                const phones = getCustomerPhones(await this.searchCustomers(filters));
 
-            this.isLoading = true;
-
-            if (this.hasCustomerGroups) {
-                let phoneNumbers = [];
-
-                for (const customer of await this.searchCustomers(this.getFilters())) {
-                    let phone = null;
-
-                    for (const address of customer.addresses) {
-                        if ((address.phoneNumber || '').length) {
-                            phone = address.phoneNumber;
-
-                            if (customer.defaultShippingAddressId) {
-                                break;
-                            }
-
-                            break;
-                        }
-                    }
-
-                    if (phone) {
-                        phoneNumbers.push(phone);
-                    }
-                }
-
-                if (phoneNumbers.length) {
-                    params.to = phoneNumbers.join(',');
+                if (phones.length) {
+                    params.to = phones;
                 }
             }
 
@@ -185,13 +160,20 @@ Shopware.Component.register('sms77-api-compose', {
         },
 
         async searchCustomers(filters) {
-            const criteria = this.defaultCriteria();
+            const criteria = new Shopware.Data.Criteria(1, this.customerLimit)
+                .addAssociation('addresses');
 
             for (const filter of filters || []) {
                 criteria.addFilter(filter);
             }
 
             return await this.customerRepository.search(criteria, Shopware.Context.api);
+        },
+
+        setCountryIds(countries) {
+            this.countries = countries;
+
+            this.configuration.countryIds = this.countries.getIds();
         },
 
         setCustomerGroupIds(customerGroups) {

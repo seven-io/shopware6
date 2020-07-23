@@ -11,14 +11,9 @@ export const Sms77ApiMixin = {
     },
 
     data: () => ({
-        messageRepository: null,
         sms77Client: null,
         systemConfig: null,
     }),
-
-    created() {
-        this.messageRepository = this.repositoryFactory.create('sms77_message');
-    },
 
     metaInfo() {
         return {
@@ -81,39 +76,24 @@ export const Sms77ApiMixin = {
                 ? sms77Res : config.json
                     ? sms77Res[successKey] : JSON.parse(sms77Res)[successKey];
 
-            const entity = this.createEntity({
-                config,
-                response: config.json ? sms77Res : {[successKey]: code},
-                type: 'sms',
-            });
-
-            return await this.saveEntity(entity);
-        },
-
-        createEntity(obj) {
             const entity = this.messageRepository.create(context);
+            entity.config = config;
+            entity.response = config.json ? sms77Res : {[successKey]: code};
+            entity.type = 'sms';
 
-            for (const [key, value] of Object.entries(obj)) {
-                entity[key] = value;
-            }
-
-            return entity;
-        },
-
-        async findAllMessages() {
-            return await this.messageRepository
-                .search(new Shopware.Data.Criteria()
-                    .addSorting(Shopware.Data.Criteria.sort('createdAt', 'DESC')), context);
-        },
-
-        async saveEntity(proxy) {
-            const response = await this.messageRepository.save(proxy, context);
+            const response = await this.messageRepository.save(entity, context);
 
             if (204 !== response.status) {
                 throw new Error(response);
             }
 
             return response;
+        },
+
+        async findAllMessages() {
+            return await this.messageRepository
+                .search(new Shopware.Data.Criteria()
+                    .addSorting(Shopware.Data.Criteria.sort('createdAt', 'DESC')), context);
         },
     },
 };

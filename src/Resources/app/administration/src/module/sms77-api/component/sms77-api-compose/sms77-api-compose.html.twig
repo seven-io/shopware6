@@ -33,8 +33,6 @@
                             v-tooltip="translateSettingTooltip('text')"
                     ></sw-textarea-field>
 
-                    <p>{{ $t('sms77-api.compose.intro') }}</p>
-
                     <sw-text-field
                             v-bind='commonSettingAttrs("to")'
                             v-model='configuration.smsParams.to'
@@ -42,11 +40,16 @@
                     >
                     </sw-text-field>
 
+                    <h3>{{ $t('sw-product.variations.overview.filter') }}</h3>
+                    <p>{{ $t('sms77-api.compose.intro') }}</p>
+
                     <sw-entity-multi-select
                             @change="setCustomerGroupIds"
                             entity="customer_group"
                             :entityCollection="customerGroups"
                             :label="translateSettingLabel('customer.groupIds')"
+                            :resultLimit='null'
+                            :valueLimit='null'
                             v-if='null !== customerGroups'
                             v-tooltip="translateSettingTooltip('customer.groupIds')"
                     >
@@ -57,8 +60,22 @@
                             entity="sales_channel"
                             :entityCollection="salesChannels"
                             :label="translateSettingLabel('customer.salesChannelIds')"
+                            :resultLimit='null'
+                            :valueLimit='null'
                             v-if='null !== salesChannels'
                             v-tooltip="translateSettingTooltip('customer.salesChannelIds')"
+                    >
+                    </sw-entity-multi-select>
+
+                    <sw-entity-multi-select
+                            @change="setCountryIds"
+                            entity="country"
+                            :entityCollection="countries"
+                            :label="translateSettingLabel('customer.countryIds')"
+                            :resultLimit='null'
+                            :valueLimit='null'
+                            v-if='null !== countries'
+                            v-tooltip="translateSettingTooltip('customer.countryIds')"
                     >
                     </sw-entity-multi-select>
 
