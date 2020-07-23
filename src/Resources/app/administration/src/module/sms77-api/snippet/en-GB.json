@@ -2,8 +2,9 @@
     "sms77-api": {
         "navigation": "Sms77.io API",
         "compose": {
+            "filters": "Recipient Filters",
             "header": "Compose SMS",
-            "intro": "If no filter is set and 'To' is left empty, the 'Text' gets sent to all (active) customers.",
+            "intro": "If no recipient filter is set and 'To' is left empty, the 'Text' gets sent to all customers.",
             "text": {
                 "label": "Text",
                 "desc": "The actual message content.",
@@ -22,7 +23,7 @@
                 },
                 "groupIds": {
                     "label": "Customer Groups",
-                    "desc": "If set, the message gets sent to all (active) users from the selected group(s). Uses 'to' as fallback."
+                    "desc": "If set, the message gets sent to all customers from the selected group(s). Uses 'to' as fallback."
                 },
                 "limit": {
                     "label": "Customer Limit",
@@ -30,7 +31,7 @@
                 },
                 "salesChannelIds": {
                     "label": "Sales Channels",
-                    "desc": "If set, the message gets sent to all (active) users from the selected sales channel(s)."
+                    "desc": "If set, the message gets sent to all customers from the selected sales channel(s)."
                 }
             },
             "debug": {
@@ -88,9 +89,13 @@
                 "label": "TTL",
                 "desc": "Set a custom time to live."
             },
-            "onlyActiveCustomers": {
+            "activeCustomers": {
                 "label": "Only active customers",
-                "desc": "When working with customer groups this setting limits the search to active customers only."
+                "desc": "This setting decides whether to send messages only to active customers or not."
+            },
+            "guestCustomers": {
+                "label": "Message guest customers",
+                "desc": "This setting decides whether to send messages only to guest customers or not."
             },
             "type": "Type",
             "config": "Config",

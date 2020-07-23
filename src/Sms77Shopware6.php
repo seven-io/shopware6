@@ -23,7 +23,7 @@ class Sms77Shopware6 extends Plugin {
         /* @var EntityRepositoryInterface $systemConfigRepository */
         $systemConfigRepository = $this->container->get('system_config.repository');
 
-        $systemConfigRepository->delete(array_map(static function($id) {
+        $systemConfigRepository->delete(array_map(static function ($id) {
             return ['id' => $id];
         }, $systemConfigRepository
             ->searchIds((new Criteria())->addFilter(new ContainsFilter(

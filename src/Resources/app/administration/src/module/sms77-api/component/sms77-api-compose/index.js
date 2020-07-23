@@ -1,6 +1,6 @@
 import template from './sms77-api-compose.html.twig';
 import {Sms77ApiMixin} from '../Sms77ApiMixin';
-import {getCustomerPhones} from '../../util';
+import {getCustomerPhones, addMessageSignature} from '../../util';
 
 Shopware.Component.register('sms77-api-compose', {
     computed: {
@@ -16,27 +16,8 @@ Shopware.Component.register('sms77-api-compose', {
             return this.repositoryFactory.create('customer_group');
         },
 
-        hasCountries() {
-            return (this.configuration.countryIds || []).length;
-        },
-
-        hasCustomerGroups() {
-            return (this.configuration.customerGroupIds || []).length;
-        },
-
-        hasSalesChannels() {
-            return (this.configuration.salesChannelIds || []).length;
-        },
-
         isDisabled() {
-            if ((!this.configuration.smsParams.text || '').length) {
-                return true;
-            }
-
-            return !(this.configuration.smsParams.to || '').length
-                && !this.hasCountries
-                && !this.hasCustomerGroups
-                && !this.hasSalesChannels;
+            return !(this.configuration.smsParams.text || '').length;
         },
 
         salesChannelRepository() {
@@ -47,20 +28,36 @@ Shopware.Component.register('sms77-api-compose', {
     async created() {
         this.systemConfig = await this.getSystemConfig();
 
-        this.countries = this.repoToCollection(this.countryRepository);
-        this.customerGroups = this.repoToCollection(this.customerGroupRepository);
-        this.salesChannels = this.repoToCollection(this.salesChannelRepository);
+        this.countries = new Shopware.Data.EntityCollection(
+            this.countryRepository.route,
+            this.countryRepository.entityName,
+            Shopware.Context.api
+        );
+
+        this.customerGroups = new Shopware.Data.EntityCollection(
+            this.customerGroupRepository.route,
+            this.customerGroupRepository.entityName,
+            Shopware.Context.api
+        );
+
+        this.salesChannels = new Shopware.Data.EntityCollection(
+            this.salesChannelRepository.route,
+            this.salesChannelRepository.entityName,
+            Shopware.Context.api
+        );
 
         this.configuration.smsParams.from = (this.systemConfig.from || '');
-        this.configuration.smsParams.text = this.addSignature('');
+        this.configuration.smsParams.text = addMessageSignature(
+            '', this.systemConfig.signature, this.systemConfig.signaturePosition);
     },
 
     data: () => ({
         configuration: {
+            activeCustomers: true,
             countryIds: null,
             customerGroupIds: null,
             customerLimit: 500,
-            onlyActiveCustomers: true,
+            guestCustomers: false,
             salesChannelIds: null,
             smsParams: {
                 delay: null,
@@ -108,29 +105,30 @@ Shopware.Component.register('sms77-api-compose', {
 
             const params = {...this.configuration.smsParams};
             const errors = [];
-            const filters = [];
 
-            if (this.configuration.onlyActiveCustomers) {
-                filters.push(Shopware.Data.Criteria.equals(
-                    'active', 1));
-            }
+            if (!(this.configuration.to || '').length) {
+                const filters = [
+                    Shopware.Data.Criteria.equals(
+                        'active', this.activeCustomers ? 1 : 0),
+                    Shopware.Data.Criteria.equals(
+                        'guest', this.guestCustomers ? 1 : 0),
+                ];
 
-            if (this.hasCustomerGroups) {
-                filters.push(Shopware.Data.Criteria.equalsAny(
-                    'groupId', this.configuration.customerGroupIds));
-            }
+                if (this.configuration.customerGroupIds) {
+                    filters.push(Shopware.Data.Criteria.equalsAny(
+                        'groupId', this.configuration.customerGroupIds));
+                }
 
-            if (this.hasSalesChannels) {
-                filters.push(Shopware.Data.Criteria.equalsAny(
-                    'salesChannelId', this.configuration.salesChannelIds));
-            }
+                if (this.configuration.salesChannelIds) {
+                    filters.push(Shopware.Data.Criteria.equalsAny(
+                        'salesChannelId', this.configuration.salesChannelIds));
+                }
 
-            if (this.hasCountries) {
-                filters.push(Shopware.Data.Criteria.equalsAny(
-                    'addresses.countryId', this.configuration.countryIds));
-            }
+                if (this.configuration.countryIds) {
+                    filters.push(Shopware.Data.Criteria.equalsAny(
+                        'addresses.countryId', this.configuration.countryIds));
+                }
 
-            if (filters.length || !(params.to || '').length) {
                 const phones = getCustomerPhones(await this.searchCustomers(filters));
 
                 if (phones.length) {
@@ -147,14 +145,38 @@ Shopware.Component.register('sms77-api-compose', {
             }
 
             if (errors.length) {
+                this.isLoading = false;
+
                 return this.createNotificationError({
                     message: errors.join(' '),
                 });
             }
 
-            await this.sendSms(params);
+            for (const [k, v] of Object.entries(params)) {
+                if ('' === v || null === v) {
+                    delete params[k];
+                }
+            }
+
+            const successKey = 'success';
+            const sms77Res = await this.sms77Client.sms(params);
+            const code = Number.isInteger(sms77Res)
+                ? sms77Res : params.json
+                    ? sms77Res[successKey] : JSON.parse(sms77Res)[successKey];
+
+            const entity = this.messageRepository.create(Shopware.Context.api);
+            entity.config = params;
+            entity.response = params.json ? sms77Res : {[successKey]: code};
+            entity.type = 'sms';
+
+            const response =
+                await this.messageRepository.save(entity, Shopware.Context.api);
 
             this.isLoading = false;
+
+            if (204 !== response.status) {
+                throw new Error(response);
+            }
 
             this.$router.push({name: 'sms77.api.index',});
         },

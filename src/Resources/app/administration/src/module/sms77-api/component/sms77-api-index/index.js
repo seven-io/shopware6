@@ -38,11 +38,12 @@ const component = {
     ],
 
     async created() {
-        this.messageRepository = this.repositoryFactory.create('sms77_message');
-
         this.systemConfig = await this.getSystemConfig();
 
-        this.messages = await this.findAllMessages();
+        this.messages = await this.messageRepository
+            .search(new Shopware.Data.Criteria()
+                    .addSorting(Shopware.Data.Criteria.sort('createdAt', 'DESC')),
+                Shopware.Context.api);
     },
 
     data: () => ({

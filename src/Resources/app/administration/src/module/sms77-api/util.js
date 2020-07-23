@@ -21,3 +21,13 @@ export const getCustomerPhones = (customers) => {
 
     return phoneNumbers.join(',');
 };
+
+export const addMessageSignature = (text, signature, signaturePosition) => {
+    if (signature && signaturePosition) {
+        text = 'append' === signaturePosition
+            ? `${signature}${text}`
+            : `${text}${signature}`;
+    }
+
+    return text;
+};

@@ -40,7 +40,7 @@
                     >
                     </sw-text-field>
 
-                    <h3>{{ $t('sw-product.variations.overview.filter') }}</h3>
+                    <h3>{{ $t('sms77-api.compose.filters') }}</h3>
                     <p>{{ $t('sms77-api.compose.intro') }}</p>
 
                     <sw-entity-multi-select
@@ -88,9 +88,15 @@
                     ></sw-number-field>
 
                     <sw-switch-field
-                            v-bind='commonSettingAttrs("onlyActiveCustomers")'
-                            v-model='configuration.onlyActiveCustomers'
-                            v-tooltip='translateSettingTooltip("onlyActiveCustomers")'
+                            v-bind='commonSettingAttrs("activeCustomers")'
+                            v-model='configuration.activeCustomers'
+                            v-tooltip='translateSettingTooltip("activeCustomers")'
+                    ></sw-switch-field>
+
+                    <sw-switch-field
+                            v-bind='commonSettingAttrs("guestCustomers")'
+                            v-model='configuration.guestCustomers'
+                            v-tooltip='translateSettingTooltip("guestCustomers")'
                     ></sw-switch-field>
                 </div>
 
