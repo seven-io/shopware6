@@ -79,6 +79,18 @@
                     >
                     </sw-entity-multi-select>
 
+                    <sw-entity-multi-select
+                            @change="setLanguageIds"
+                            entity="language"
+                            :entityCollection="languages"
+                            :label="translateSettingLabel('customer.languageIds')"
+                            :resultLimit='null'
+                            :valueLimit='null'
+                            v-if='null !== languages'
+                            v-tooltip="translateSettingTooltip('customer.languageIds')"
+                    >
+                    </sw-entity-multi-select>
+
                     <sw-number-field
                             :min='0'
                             numberType='int'

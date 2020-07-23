@@ -32,6 +32,10 @@
                 "salesChannelIds": {
                     "label": "Sales Channels",
                     "desc": "If set, the message gets sent to all customers from the selected sales channel(s)."
+                },
+                "languageIds": {
+                    "label": "Languages",
+                    "desc": "If set, the message gets sent to all customers with the selected language(s)."
                 }
             },
             "debug": {

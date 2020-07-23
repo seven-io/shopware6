@@ -20,6 +20,10 @@ Shopware.Component.register('sms77-api-compose', {
             return !(this.configuration.smsParams.text || '').length;
         },
 
+        languageRepository() {
+            return this.repositoryFactory.create('language');
+        },
+
         salesChannelRepository() {
             return this.repositoryFactory.create('sales_channel');
         },
@@ -37,6 +41,12 @@ Shopware.Component.register('sms77-api-compose', {
         this.customerGroups = new Shopware.Data.EntityCollection(
             this.customerGroupRepository.route,
             this.customerGroupRepository.entityName,
+            Shopware.Context.api
+        );
+
+        this.languages = new Shopware.Data.EntityCollection(
+            this.languageRepository.route,
+            this.languageRepository.entityName,
             Shopware.Context.api
         );
 
@@ -58,6 +68,7 @@ Shopware.Component.register('sms77-api-compose', {
             customerGroupIds: null,
             customerLimit: 500,
             guestCustomers: false,
+            languageIds: null,
             salesChannelIds: null,
             smsParams: {
                 delay: null,
@@ -83,6 +94,7 @@ Shopware.Component.register('sms77-api-compose', {
         customerGroups: null,
         info: null,
         isLoading: false,
+        languages: null,
         salesChannels: null,
     }),
 
@@ -127,6 +139,11 @@ Shopware.Component.register('sms77-api-compose', {
                 if (this.configuration.countryIds) {
                     filters.push(Shopware.Data.Criteria.equalsAny(
                         'addresses.countryId', this.configuration.countryIds));
+                }
+
+                if (this.configuration.languageIds) {
+                    filters.push(Shopware.Data.Criteria.equalsAny(
+                        'languageId', this.configuration.languageIds));
                 }
 
                 const phones = getCustomerPhones(await this.searchCustomers(filters));
@@ -202,6 +219,12 @@ Shopware.Component.register('sms77-api-compose', {
             this.customerGroups = customerGroups;
 
             this.configuration.customerGroupIds = this.customerGroups.getIds();
+        },
+
+        setLanguageIds(languages) {
+            this.languages = languages;
+
+            this.configuration.languageIds = this.languages.getIds();
         },
 
         setSalesChannelIds(salesChannels) {
