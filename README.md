@@ -36,3 +36,10 @@
 <li>Partial payment refund</li>
 <li>Payment reminder</li>
 </ul>
+
+#### Screenshots
+![Screenshot of compose page](https://tettra-production.s3.us-west-2.amazonaws.com/0d6efb4f154041e899af17bdcd19c1b5/bcac36a50716f4f73cd84020c4bf091d/d822b155a4112474fdb7aea5ee22465e/cb30d8dd64d0e83fcc7822a40f1703d9/LvK98NgceAQ3333Uuxin7nOBQe90CiS8HwLQXDA8.png "Shopware6.Sms77: Compose SMS")
+![Screenshot 1/4 of plugin settings](https://tettra-production.s3.us-west-2.amazonaws.com/0d6efb4f154041e899af17bdcd19c1b5/bcac36a50716f4f73cd84020c4bf091d/d822b155a4112474fdb7aea5ee22465e/cb30d8dd64d0e83fcc7822a40f1703d9/qS6RVUwCMnYQYKrGy7O4wCi3EFDHbhvZl4IeuUjO.png "Shopware6.Sms77: Plugin Settings 1/4")
+![Screenshot 2/4 of plugin settings](https://tettra-production.s3.us-west-2.amazonaws.com/0d6efb4f154041e899af17bdcd19c1b5/bcac36a50716f4f73cd84020c4bf091d/d822b155a4112474fdb7aea5ee22465e/cb30d8dd64d0e83fcc7822a40f1703d9/7F6MwKyQqDc6qKrPj2aTvg6yar0OIRBmnkJG9ZMc.png "Shopware6.Sms77: Plugin Settings 2/4")
+![Screenshot 3/4 of plugin settings](https://tettra-production.s3.us-west-2.amazonaws.com/0d6efb4f154041e899af17bdcd19c1b5/bcac36a50716f4f73cd84020c4bf091d/d822b155a4112474fdb7aea5ee22465e/cb30d8dd64d0e83fcc7822a40f1703d9/khPXkX7m5AJRDmBHyt5WbxhAbfVt2TwXG9oAQ1Mv.png "Shopware6.Sms77: Plugin Settings 3/4")
+![Screenshot 4/4 of plugin settings](https://tettra-production.s3.us-west-2.amazonaws.com/0d6efb4f154041e899af17bdcd19c1b5/bcac36a50716f4f73cd84020c4bf091d/d822b155a4112474fdb7aea5ee22465e/cb30d8dd64d0e83fcc7822a40f1703d9/W06KCtdmDXdhN0EsGZD7WSyXie2Z5v2ApgniyiKk.png "Shopware6.Sms77: Plugin Settings 4/4")
