@@ -112,8 +112,7 @@
             <name>textOnOrderCancelled</name>
             <label>Cancellation message</label>
             <label lang="de-DE">Stornonachricht</label>
-            <defaultValue>Dear customer. We are sorry about the cancelled order.
-                We hope to serve you again soon. Best regards!
+            <defaultValue>Dear customer. We are sorry about the cancelled order. We hope to serve you again soon. Best regards!
             </defaultValue>
             <helpText>Defines the text content for cancellations.</helpText>
             <helpText lang="de-DE">Definiert den SMS-Inhalt bei Stornierungen.
@@ -125,8 +124,7 @@
             <name>textOnOrderCompleted</name>
             <label>Completion message</label>
             <label lang="de-DE">Finalisierungsnachricht</label>
-            <defaultValue>Dear customer. Your order has been marked as
-                completed. Enjoy your goods. Best regards!
+            <defaultValue>Dear customer. Your order has been marked as completed. Enjoy your goods. Best regards!
             </defaultValue>
             <helpText>Defines the text content for order completions.</helpText>
             <helpText lang="de-DE">Definiert den SMS-Inhalt bei
@@ -139,8 +137,7 @@
             <name>textOnOrderDeliveryCancelled</name>
             <label>Delivery cancellation message</label>
             <label lang="de-DE">Lieferstorno-Nachricht</label>
-            <defaultValue>Dear customer. Your order delivery has been marked as
-                cancelled. With best regards!
+            <defaultValue>Dear customer. Your order delivery has been marked as cancelled. With best regards!
             </defaultValue>
             <helpText>Defines the text content for delivery cancellations.
             </helpText>
@@ -154,8 +151,7 @@
             <name>textOnOrderDeliveryShipped</name>
             <label>Shipping message</label>
             <label lang="de-DE">Versandnachricht</label>
-            <defaultValue>Dear customer. Your order is ready to be shipped. Log
-                in to your customer account for more information. Best regards!
+            <defaultValue>Dear customer. Your order is ready to be shipped. Log in to your customer account for more information. Best regards!
             </defaultValue>
             <helpText>Defines the text content for shipping confirmation.
             </helpText>
@@ -169,9 +165,7 @@
             <name>textOnOrderDeliveryShippedPartially</name>
             <label>Part shipping message</label>
             <label lang="de-DE">Teilmengen-Versandnachricht</label>
-            <defaultValue>Dear customer. Your order is ready to be partially
-                shipped. Log in to your customer account for more information.
-                Best regards!
+            <defaultValue>Dear customer. Your order is ready to be partially shipped. Log in to your customer account for more information. Best regards!
             </defaultValue>
             <helpText>Defines the text content for partial shipping
                 confirmation.
@@ -186,8 +180,7 @@
             <name>textOnOrderDeliveryReturned</name>
             <label>Return message</label>
             <label lang="de-DE">Retournachricht</label>
-            <defaultValue>Dear customer. Your order has been marked as returned.
-                With best regards!
+            <defaultValue>Dear customer. Your order has been marked as returned. With best regards!
             </defaultValue>
             <helpText>Defines the text content for returns.</helpText>
             <helpText lang="de-DE">Definiert den SMS-Inhalt bei Retouren.
@@ -199,8 +192,7 @@
             <name>textOnOrderDeliveryReturnedPartially</name>
             <label>Partial return message</label>
             <label lang="de-DE">Teilretoure-Nachricht</label>
-            <defaultValue>Dear customer. Your order has been partially marked as
-                returned. With best regards!
+            <defaultValue>Dear customer. Your order has been partially marked as returned. With best regards!
             </defaultValue>
             <helpText>Defines the text content for partial returns.</helpText>
             <helpText lang="de-DE">Definiert den SMS-Inhalt bei Teil-Retouren.
@@ -212,8 +204,7 @@
             <name>textOnOrderTransactionPaid</name>
             <label>Payment message</label>
             <label lang="de-DE">Zahlungsnachricht</label>
-            <defaultValue>Dear customer. Your order has been marked as paid.
-                Best regards!
+            <defaultValue>Dear customer. Your order has been marked as paid. Best regards!
             </defaultValue>
             <helpText>Defines the text content for the payment clearance.
             </helpText>
@@ -227,8 +218,7 @@
             <name>textOnOrderTransactionPaidPartially</name>
             <label>Part payment message</label>
             <label lang="de-DE">Teilzahlungs-Nachricht</label>
-            <defaultValue>Dear customer. Your order has been marked as partially
-                paid. Best regards!
+            <defaultValue>Dear customer. Your order has been marked as partially paid. Best regards!
             </defaultValue>
             <helpText>Defines the text content for the partial payment
                 clearance.
@@ -243,8 +233,7 @@
             <name>textOnOrderTransactionRefunded</name>
             <label>Refund message</label>
             <label lang="de-DE">Rückerstattung</label>
-            <defaultValue>Dear customer. The order amount has been marked as
-                being refunded. Best regards!
+            <defaultValue>Dear customer. The order amount has been marked as being refunded. Best regards!
             </defaultValue>
             <helpText>Defines the text content for refunds.</helpText>
             <helpText lang="de-DE">Definiert den SMS-Inhalt für
@@ -257,8 +246,7 @@
             <name>textOnOrderTransactionRefundedPartially</name>
             <label>Partial refund message</label>
             <label lang="de-DE">Teil-Rückerstattung</label>
-            <defaultValue>Dear customer. The order amount has been marked as
-                being partially refunded. Best regards!
+            <defaultValue>Dear customer. The order amount has been marked as being partially refunded. Best regards!
             </defaultValue>
             <helpText>Defines the text content for partial refunds.</helpText>
             <helpText lang="de-DE">Definiert den SMS-Inhalt für
@@ -271,9 +259,7 @@
             <name>textOnOrderTransactionReminded</name>
             <label>Payment reminder message</label>
             <label lang="de-DE">Zahlungserinnerung</label>
-            <defaultValue>Dear customer. This is just a little reminder that
-                your order still needs to be paid before it gets shipped. Best
-                regards!
+            <defaultValue>Dear customer. This is just a little reminder that your order still needs to be paid before it gets shipped. Best regards!
             </defaultValue>
             <helpText>Defines the text content for the payment reminder.
             </helpText>
@@ -287,8 +273,7 @@
             <name>textOnOrderTransactionCancelled</name>
             <label>Payment cancellation message</label>
             <label lang="de-DE">Zahlungsausfall-Nachricht</label>
-            <defaultValue>Dear customer. Your order payment has been marked as
-                cancelled. Best regards!
+            <defaultValue>Dear customer. Your order payment has been marked as cancelled. Best regards!
             </defaultValue>
             <helpText>Defines the text content for payment cancellations.
             </helpText>

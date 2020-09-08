@@ -1,6 +1,6 @@
 ![Sms77.io Logo](https://www.sms77.io/wp-content/uploads/2019/07/sms77-Logo-400x79.png "sms77")
 
-# sms77io plugin for Shopware 6
+# Sms77.io plugin for Shopware 6
 
 ## Installation
 <ol>
@@ -11,6 +11,7 @@
 <li>Navigate to Administration -&gt; Settings -&gt; System -&gt; Plugins -&gt; sms77io</li>
 <li>Enter and save the required API key</li>
 </ol>
+You can alternatively download the <a href='https://github.com/sms77io/shopware6-plugin/releases/latest'>latest Release</a> and upload the *.zip via the plugin manager.
 
 ### Plugin options
 <ul>
