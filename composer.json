@@ -12,7 +12,7 @@
             "Sms77\\Shopware6\\": "src/"
         }
     },
-    "description": "Shopware 6 plugin to programmatically send SMS via the Sms77.io gateway.",
+    "description": "Shopware 6 plugin to programmatically send SMS via the sms77.io gateway.",
     "extra": {
         "shopware-plugin-class": "Sms77\\Shopware6\\Sms77Shopware6",
         "copyright": "(c) by sms77 e.K.",
@@ -21,8 +21,8 @@
             "en-GB": "sms77io"
         },
         "description": {
-            "de-DE": "Plugin zum programmatischem Versand von SMS via Sms77.io.",
-            "en-GB": "Plugin to programmatically send SMS via the Sms77.io gateway."
+            "de-DE": "Plugin zum programmatischem Versand von SMS via sms77.io.",
+            "en-GB": "Plugin to programmatically send SMS via the sms77.io gateway."
         },
         "supportLink": {
             "de-DE": "https://www.sms77.io/de/",

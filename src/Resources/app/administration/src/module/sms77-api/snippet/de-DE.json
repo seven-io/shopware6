@@ -1,0 +1,124 @@
+{
+    "sms77-api": {
+        "navigation": "sms77.io API",
+        "compose": {
+            "filters": "Empfänger-Filter",
+            "header": "SMS erstellen",
+            "intro": "Ist kein Empfänger-Filter gesetzt und das Feld 'Empfänger' leer, wird an alle Kunden versendet.",
+            "text": {
+                "label": "Text",
+                "desc": "Der eigentlichte Nachrichteninhalt.",
+                "error": {
+                    "empty": "Kein Text gegeben. Kann keine leere Nachricht versenden."
+                }
+            },
+            "from": {
+                "label": "Absender",
+                "desc": "Absenderkennung"
+            },
+            "customer": {
+                "countryIds": {
+                    "label": "Länder",
+                    "desc": "Wenn gesetzt, wird Versand limitiert auf Kundschaft gewählter Länder."
+                },
+                "groupIds": {
+                    "label": "Kundengruppen",
+                    "desc": "Wenn gesetzt, wird Versand limitiert auf Kundschaft gewählter Gruppen."
+                },
+                "limit": {
+                    "label": "Kundenlimit",
+                    "desc": "Maximale Anzahl an Kunden pro Versandvorgang."
+                },
+                "salesChannelIds": {
+                    "label": "Verkaufskanäle",
+                    "desc": "Wenn gesetzt, wird Versand limitiert auf Kundschaft gewählter Verkaufskanäle."
+                },
+                "languageIds": {
+                    "label": "Languages",
+                    "desc": "Wenn gesetzt, wird Versand limitiert auf Kundschaft mit gewählten Sprachen."
+                }
+            },
+            "debug": {
+                "label": "Debug",
+                "desc": "Nachrichtenversand deaktivieren?"
+            },
+            "to": {
+                "label": "Empfängernummer(n)",
+                "desc": "Definiert die Empfängernummer(n).",
+                "error": {
+                    "empty": "Keine Empfänger gefunden. Kann keine Nachricht ohne versenden."
+                }
+            },
+            "performance_tracking": {
+                "label": "Performance Tracking",
+                "desc": "Performance tracking für im Text gefundene Links?"
+            },
+            "json": {
+                "label": "JSON",
+                "desc": "Eine detaillierte JSON-Antwort zurückgeben?"
+            },
+            "return_msg_id": {
+                "label": "Nachrichten-ID zurückgeben",
+                "desc": "Hängt die Nachrichten-ID an die Antwort. Hat keinen Effekt wenn 'JSON' aktiviert ist."
+            },
+            "details": {
+                "label": "Details",
+                "desc": "Eine detaillierte Antwort zurückgeben? Hat keinen Effekt wenn 'JSON' aktiviert ist."
+            },
+            "utf8": {
+                "label": "UTF-8",
+                "desc": "Serverautomatik ignorieren und Kodierung als UTF-8 erzwingen?"
+            },
+            "flash": {
+                "label": "Flash",
+                "desc": "Versand als Flash-SMS?"
+            },
+            "unicode": {
+                "label": "Unicode",
+                "desc": "Serverautomatik ignorieren und Kodierung als Unicode für bspw. Kyrillisch oder Arabisch erzwingen? Reduziert die SMS-Länge auf 70 Zeichen."
+            },
+            "no_reload": {
+                "label": "Duplikate erlauben",
+                "desc": "Erlaube Versand von Duplikaten wo Text und Empfänger innerhalb 180 Sekunden identisch sind?"
+            },
+            "foreign_id": {
+                "label": "Foreign ID",
+                "desc": "Beliebiger Wert zurückgegeben in DLR-Ccallbacks etc. mit max. 64 Zeichen bestehend aus a-z, A-Z, 0-9, .-_@"
+            },
+            "label": {
+                "label": "Label",
+                "desc": "Beliebiger Wert für Statistiken mit max. 100 Zeichen bestehend aus a-z, A-Z, 0-9, .-_@"
+            },
+            "ttl": {
+                "label": "TTL",
+                "desc": "Eine eigene Gültigkeitsperiode in Minuten zuweisen."
+            },
+            "activeCustomers": {
+                "label": "Nur aktive Kunden",
+                "desc": "Wenn gesetzt, wird der Versand auf aktive Kunden beschränkt."
+            },
+            "guestCustomers": {
+                "label": "Versand an Gäste",
+                "desc": "Wenn gesetzt, erfolgt der Versand auch an Gäste"
+            },
+            "type": "Typ",
+            "config": "Konfiguration",
+            "response": "Antwort",
+            "created": "Erstellt",
+            "updated": "Aktualisiert",
+            "udh": {
+                "label": "UDH",
+                "desc": "Eigenen User Data Header setzen - nur für erfahrene Anwender."
+            },
+            "delay": {
+                "label": "Versandzeitpunkt",
+                "desc": "Datum/Zeitstempel für Versand. Akzeptiert einen UNIX-Zeitstempel oder ein Datum formatiert als yyyy-mm-dd hh:ii bspw. 1141511104 oder 2016-03-04 23:25:04."
+            },
+            "submit": "Nachricht versenden"
+        },
+        "messages": {
+            "header": "Nachrichtenverlauf",
+            "resend": "Erneut versenden"
+        }
+    }
+}

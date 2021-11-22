@@ -1,6 +1,6 @@
 {
     "sms77-api": {
-        "navigation": "Sms77.io API",
+        "navigation": "sms77.io API",
         "compose": {
             "filters": "Recipient Filters",
             "header": "Compose SMS",
