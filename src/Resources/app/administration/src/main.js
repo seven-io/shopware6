@@ -1,1 +1,1 @@
-import './module/sms77-api';
+import './module/seven-api';

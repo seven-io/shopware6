@@ -1,6 +1,6 @@
 {
-    "sms77-api": {
-        "navigation": "sms77.io API",
+    "seven-api": {
+        "navigation": "seven.io API",
         "compose": {
             "filters": "Empfänger-Filter",
             "header": "SMS erstellen",
@@ -38,10 +38,6 @@
                     "desc": "Wenn gesetzt, wird Versand limitiert auf Kundschaft mit gewählten Sprachen."
                 }
             },
-            "debug": {
-                "label": "Debug",
-                "desc": "Nachrichtenversand deaktivieren?"
-            },
             "to": {
                 "label": "Empfängernummer(n)",
                 "desc": "Definiert die Empfängernummer(n).",
@@ -53,33 +49,9 @@
                 "label": "Performance Tracking",
                 "desc": "Performance tracking für im Text gefundene Links?"
             },
-            "json": {
-                "label": "JSON",
-                "desc": "Eine detaillierte JSON-Antwort zurückgeben?"
-            },
-            "return_msg_id": {
-                "label": "Nachrichten-ID zurückgeben",
-                "desc": "Hängt die Nachrichten-ID an die Antwort. Hat keinen Effekt wenn 'JSON' aktiviert ist."
-            },
-            "details": {
-                "label": "Details",
-                "desc": "Eine detaillierte Antwort zurückgeben? Hat keinen Effekt wenn 'JSON' aktiviert ist."
-            },
-            "utf8": {
-                "label": "UTF-8",
-                "desc": "Serverautomatik ignorieren und Kodierung als UTF-8 erzwingen?"
-            },
             "flash": {
                 "label": "Flash",
                 "desc": "Versand als Flash-SMS?"
-            },
-            "unicode": {
-                "label": "Unicode",
-                "desc": "Serverautomatik ignorieren und Kodierung als Unicode für bspw. Kyrillisch oder Arabisch erzwingen? Reduziert die SMS-Länge auf 70 Zeichen."
-            },
-            "no_reload": {
-                "label": "Duplikate erlauben",
-                "desc": "Erlaube Versand von Duplikaten wo Text und Empfänger innerhalb 180 Sekunden identisch sind?"
             },
             "foreign_id": {
                 "label": "Foreign ID",

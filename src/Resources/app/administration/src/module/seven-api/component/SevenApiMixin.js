@@ -1,12 +1,12 @@
-import Sms77Client from 'sms77-client';
+import SevenClient from '@seven.io/api';
 
-export const Sms77ApiMixin = {
+export const SevenApiMixin = {
     created() {
-        this.messageRepository = this.repositoryFactory.create('sms77_message');
+        this.messageRepository = this.repositoryFactory.create('seven_message');
     },
 
     data: () => ({
-        sms77Client: null,
+        sevenClient: null,
         systemConfig: null,
     }),
 
@@ -24,13 +24,13 @@ export const Sms77ApiMixin = {
     },
 
     methods: {
-        getSms77Client(apiKey) {
-            return new Sms77Client(apiKey, 'shopware6');
+        getSevenClient(apiKey) {
+            return new SevenClient(apiKey, 'shopware6');
         },
 
         async getSystemConfig() {
             const config = await Shopware.Service('systemConfigApiService')
-                .getValues('Sms77Shopware6.config');
+                .getValues('SevenShopware6.config');
 
             for (const [key, value] of Object.entries(config)) {
                 if ('' !== value && undefined !== value) {
@@ -41,7 +41,7 @@ export const Sms77ApiMixin = {
             }
 
             if ((config.apiKey || '').length) {
-                this.sms77Client = this.getSms77Client(config.apiKey);
+                this.sevenClient = this.getSevenClient(config.apiKey);
             }
 
             return config;

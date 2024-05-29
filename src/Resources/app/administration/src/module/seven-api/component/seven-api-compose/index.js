@@ -1,8 +1,8 @@
-import template from './sms77-api-compose.html.twig';
-import {Sms77ApiMixin} from '../Sms77ApiMixin';
+import template from './seven-api-compose.html.twig';
+import {SevenApiMixin} from '../SevenApiMixin';
 import {getCustomerPhones, addMessageSignature} from '../../util';
 
-Shopware.Component.register('sms77-api-compose', {
+Shopware.Component.register('seven-api-compose', {
     computed: {
         countryRepository() {
             return this.repositoryFactory.create('country');
@@ -72,22 +72,15 @@ Shopware.Component.register('sms77-api-compose', {
             salesChannelIds: null,
             smsParams: {
                 delay: null,
+                flash: false,
                 foreign_id: null,
                 from: null,
                 label: null,
-                udh: null,
-                debug: false,
-                details: false,
-                flash: false,
-                json: false,
-                no_reload: false,
                 performance_tracking: false,
-                return_msg_id: false,
-                unicode: false,
-                utf8: false,
                 text: null,
                 to: null,
                 ttl: null,
+                udh: null,
             },
         },
         countries: null,
@@ -154,11 +147,11 @@ Shopware.Component.register('sms77-api-compose', {
             }
 
             if (!(params.to || '').length) {
-                errors.push(this.$t('sms77-api.compose.to.error.empty'));
+                errors.push(this.$t('seven-api.compose.to.error.empty'));
             }
 
             if (!(params.text || '').length) {
-                errors.push(this.$t('sms77-api.compose.text.error.empty'));
+                errors.push(this.$t('seven-api.compose.text.error.empty'));
             }
 
             if (errors.length) {
@@ -176,14 +169,14 @@ Shopware.Component.register('sms77-api-compose', {
             }
 
             const successKey = 'success';
-            const sms77Res = await this.sms77Client.sms(params);
-            const code = Number.isInteger(sms77Res)
-                ? sms77Res : params.json
-                    ? sms77Res[successKey] : JSON.parse(sms77Res)[successKey];
+            const sevenRes = await this.sevenClient.sms(params);
+            const code = Number.isInteger(sevenRes)
+                ? sevenRes : params.json
+                    ? sevenRes[successKey] : JSON.parse(sevenRes)[successKey];
 
             const entity = this.messageRepository.create(Shopware.Context.api);
             entity.config = params;
-            entity.response = params.json ? sms77Res : {[successKey]: code};
+            entity.response = params.json ? sevenRes : {[successKey]: code};
             entity.type = 'sms';
 
             const response =
@@ -195,7 +188,7 @@ Shopware.Component.register('sms77-api-compose', {
                 throw new Error(response);
             }
 
-            this.$router.push({name: 'sms77.api.index',});
+            this.$router.push({name: 'seven.api.index',});
         },
 
         async searchCustomers(filters) {
@@ -234,7 +227,7 @@ Shopware.Component.register('sms77-api-compose', {
         },
 
         translateSetting(name, key) {
-            return this.$t(`sms77-api.compose.${name}.${key}`);
+            return this.$t(`seven-api.compose.${name}.${key}`);
         },
 
         translateSettingDesc(name) {
@@ -250,7 +243,7 @@ Shopware.Component.register('sms77-api-compose', {
         },
     },
 
-    mixins: [Sms77ApiMixin, Shopware.Mixin.getByName('notification')],
+    mixins: [SevenApiMixin, Shopware.Mixin.getByName('notification')],
 
     template,
 });

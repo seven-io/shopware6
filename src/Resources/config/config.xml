@@ -2,18 +2,18 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/shopware/platform/master/src/Core/System/SystemConfig/Schema/config.xsd">
     <card>
-        <title>sms77io Configuration</title>
-        <title lang="de-DE">sms77io Konfiguration</title>
+        <title>seven Configuration</title>
+        <title lang="de-DE">seven Konfiguration</title>
 
         <input-field>
             <name>apiKey</name>
             <label>API key</label>
             <label lang="de-DE">API-Schlüssel</label>
             <helpText>An API key is needed in order to send SMS. Get yours now
-                at sms77.io.
+                at seven.io.
             </helpText>
             <helpText lang="de-DE">Ein API-Schlüssel wird benötigt um SMS senden
-                zu können. Erfahren Sie mehr auf sms77.io.
+                zu können. Erfahren Sie mehr auf seven.io.
             </helpText>
             <copyable>true</copyable>
         </input-field>
@@ -287,7 +287,7 @@
             <name>from</name>
             <label>Sender</label>
             <label lang="de-DE">Absenderkennung</label>
-            <defaultValue>sms77io</defaultValue>
+            <defaultValue>seven</defaultValue>
             <helpText>Defines the sender name for transmitted messages.
             </helpText>
             <helpText lang="de-DE">Definiert die Absenderkennung der

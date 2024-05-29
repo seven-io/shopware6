@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Sms77\Shopware6\Core\Content\Message;
+namespace Seven\Shopware6\Core\Content\Message;
 
 use Shopware\Core\Framework\DataAbstractionLayer\EntityDefinition;
 use Shopware\Core\Framework\DataAbstractionLayer\Field\Flag\PrimaryKey;
@@ -11,7 +11,7 @@ use Shopware\Core\Framework\DataAbstractionLayer\Field\StringField;
 use Shopware\Core\Framework\DataAbstractionLayer\FieldCollection;
 
 class MessageDefinition extends EntityDefinition {
-    public const ENTITY_NAME = 'sms77_message';
+    public const ENTITY_NAME = 'seven_message';
 
     public function getEntityName(): string {
         return self::ENTITY_NAME;

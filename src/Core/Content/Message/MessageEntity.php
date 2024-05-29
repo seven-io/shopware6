@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Sms77\Shopware6\Core\Content\Message;
+namespace Seven\Shopware6\Core\Content\Message;
 
 use Shopware\Core\Framework\DataAbstractionLayer\Entity;
 use Shopware\Core\Framework\DataAbstractionLayer\EntityIdTrait;
@@ -8,13 +8,8 @@ use Shopware\Core\Framework\DataAbstractionLayer\EntityIdTrait;
 class MessageEntity extends Entity {
     use EntityIdTrait;
 
-    /** @var string $config */
-    protected $config;
-
-    /** @var string $response */
-    protected $response;
-
-    /** @var string $type */
+    protected string $config;
+    protected string $response;
     protected $type;
 
     public function getConfig(): string {

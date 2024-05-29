@@ -1,6 +1,6 @@
 {
-    "sms77-api": {
-        "navigation": "sms77.io API",
+    "seven-api": {
+        "navigation": "seven.io API",
         "compose": {
             "filters": "Recipient Filters",
             "header": "Compose SMS",
@@ -38,10 +38,6 @@
                     "desc": "If set, the message gets sent to all customers with the selected language(s)."
                 }
             },
-            "debug": {
-                "label": "Debug",
-                "desc": "Disable message dispatching?"
-            },
             "to": {
                 "label": "To",
                 "desc": "Defines the recipient(s).",
@@ -53,33 +49,9 @@
                 "label": "Performance Tracking",
                 "desc": "Enable performance tracking for found URLs?"
             },
-            "json": {
-                "label": "JSON",
-                "desc": "Return a detailed JSON response?"
-            },
-            "return_msg_id": {
-                "label": "Return MSG ID",
-                "desc": "Append the message ID to the status response? Has no effect if 'JSON' is set to true."
-            },
-            "details": {
-                "label": "Details",
-                "desc": "Return a detailed response? Has no effect if 'JSON' is set to true."
-            },
-            "utf8": {
-                "label": "UTF8",
-                "desc": "Ignore server detection and force UTF-8 character set?"
-            },
             "flash": {
                 "label": "Flash",
                 "desc": "Dispatch as flash message(s)?"
-            },
-            "unicode": {
-                "label": "Unicode",
-                "desc": "Ignore server detection and force unicode transmission for Cyrillic, Arabic etc characters? The SMS length gets reduced to 70 characters."
-            },
-            "no_reload": {
-                "label": "No Reload",
-                "desc": "Switch off reload lock?"
             },
             "foreign_id": {
                 "label": "Foreign ID",

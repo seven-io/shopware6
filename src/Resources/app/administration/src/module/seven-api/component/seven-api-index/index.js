@@ -1,38 +1,38 @@
-import template from './sms77-api-index.html.twig';
-import {Sms77ApiMixin} from '../Sms77ApiMixin';
+import template from './seven-api-index.html.twig';
+import {SevenApiMixin} from '../SevenApiMixin';
 
 const component = {
     columns: [
         {
             allowResize: true,
             dataIndex: 'type',
-            label: 'sms77-api.compose.type',
+            label: 'seven-api.compose.type',
             primary: true,
             property: 'type',
         },
         {
             allowResize: true,
             dataIndex: 'config',
-            label: 'sms77-api.compose.config',
+            label: 'seven-api.compose.config',
             property: 'config',
             sortable: false,
         },
         {
             allowResize: true,
             dataIndex: 'response',
-            label: 'sms77-api.compose.response',
+            label: 'seven-api.compose.response',
             property: 'response',
         },
         {
             allowResize: true,
             dataIndex: 'created_at',
-            label: 'sms77-api.compose.created',
+            label: 'seven-api.compose.created',
             property: 'created_at',
         },
         {
             allowResize: true,
             dataIndex: 'updated_at',
-            label: 'sms77-api.compose.updated',
+            label: 'seven-api.compose.updated',
             property: 'updated_at',
         },
     ],
@@ -60,9 +60,9 @@ const component = {
         }
     },
 
-    mixins: [Sms77ApiMixin,],
+    mixins: [SevenApiMixin,],
 
     template,
 };
 
-Shopware.Component.register('sms77-api-index', component);
+Shopware.Component.register('seven-api-index', component);

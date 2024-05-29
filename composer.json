@@ -1,51 +1,54 @@
 {
-    "authors": [
-        {
-            "email": "support@sms77.io",
-            "homepage": "https://www.sms77.io",
-            "name": "sms77 e.K.",
-            "role": "Organization"
-        }
-    ],
-    "autoload": {
-        "psr-4": {
-            "Sms77\\Shopware6\\": "src/"
-        }
+  "authors" : [
+    {
+      "email" : "support@seven.io",
+      "homepage" : "https://www.seven.io",
+      "name" : "seven communications GmbH & Co. KG",
+      "role" : "Organization"
+    }
+  ],
+  "autoload" : {
+    "psr-4" : {
+      "Seven\\Shopware6\\" : "src/"
+    }
+  },
+  "autoload-dev" : {
+    "psr-4" : {
+      "Seven\\Shopware6\\Tests\\" : "tests/"
+    }
+  },
+  "description" : "Shopware 6 plugin to programmatically send SMS via the seven.io gateway.",
+  "extra" : {
+    "shopware-plugin-class" : "Seven\\Shopware6\\SevenShopware6",
+    "copyright" : "(c) by seven communications GmbH & Co. KG",
+    "label" : {
+      "de-DE" : "seven",
+      "en-GB" : "seven"
     },
-    "description": "Shopware 6 plugin to programmatically send SMS via the sms77.io gateway.",
-    "extra": {
-        "shopware-plugin-class": "Sms77\\Shopware6\\Sms77Shopware6",
-        "copyright": "(c) by sms77 e.K.",
-        "label": {
-            "de-DE": "sms77io",
-            "en-GB": "sms77io"
-        },
-        "description": {
-            "de-DE": "Plugin zum programmatischem Versand von SMS via sms77.io.",
-            "en-GB": "Plugin to programmatically send SMS via the sms77.io gateway."
-        },
-        "supportLink": {
-            "de-DE": "https://www.sms77.io/de/",
-            "en-GB": "https://www.sms77.io/en/"
-        }
+    "description" : {
+      "de-DE" : "Plugin zum programmatischem Versand von SMS via seven.io.",
+      "en-GB" : "Plugin to programmatically send SMS via the seven.io gateway."
     },
-    "keywords": [
-        "sms",
-        "shopware"
-    ],
-    "license": "MIT",
-    "name": "sms77/shopware6",
-    "require": {
-        "sms77/api": "^1.1"
-    },
-    "require-dev": {
-      "shopware/core": "6.*",
-      "shopware/administration": "6.*"
-    },
-    "support": {
-        "email": "support@sms77.io",
-        "rss": "https://www.sms77.io/en/feed/",
-        "docs": "https://www.sms77.io/en/docs/third-party-solutions/shopware-6/"
-    },
-    "type": "shopware-platform-plugin"
+    "supportLink" : {
+      "de-DE" : "https://www.seven.io/de/",
+      "en-GB" : "https://www.seven.io/en/"
+    }
+  },
+  "keywords" : [
+    "sms",
+    "shopware"
+  ],
+  "license" : "MIT",
+  "name" : "seven.io/shopware6",
+  "require" : {
+    "seven.io/api" : "v5.0.0",
+    "shopware/core" : "6.*",
+    "shopware/administration" : "6.*"
+  },
+  "support" : {
+    "email" : "support@seven.io",
+    "rss" : "https://www.seven.io/en/feed/",
+    "docs" : "https://www.seven.io/en/docs/third-party-solutions/shopware-6/"
+  },
+  "type" : "shopware-platform-plugin"
 }

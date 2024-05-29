@@ -5,10 +5,10 @@
 ## Installation
 
 1. Open a shell and navigate to the Shopware installation directory
-2. Run `composer require sms77/shopware6`
+2. Run `composer require seven.io/shopware6`
 3. Run `php bin/console cache:clear`
-4. Run `php bin/console database:migrate --all Sms77Shopware6`
-5. Navigate to Administration -> Settings -> System -> Plugins -> sms77io
+4. Run `php bin/console database:migrate --all SevenShopware6`
+5. Navigate to Administration -> Settings -> System -> Plugins -> seven
 6. Enter and save the required API key
 
 You can alternatively download

@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Sms77\Shopware6\Core\Content\Message;
+namespace Seven\Shopware6\Core\Content\Message;
 
 use Shopware\Core\Framework\DataAbstractionLayer\EntityCollection;
 

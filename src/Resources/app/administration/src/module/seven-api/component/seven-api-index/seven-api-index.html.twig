@@ -1,16 +1,16 @@
-{% block sms77_api_index %}
+{% block seven_api_index %}
     <sw-page>
         <template slot="smart-bar-actions">
             <sw-button
-                    :routerLink="{ name: 'sms77.api.compose' }"
+                    :routerLink="{ name: 'seven.api.compose' }"
                     variant="primary"
             >
-                {{ $t('sms77-api.compose.header') }}
+                {{ $t('seven-api.compose.header') }}
             </sw-button>
         </template>
 
         <template slot="content">
-            <h2>{{ $t('sms77-api.messages.header') }}</h2>
+            <h2>{{ $t('seven-api.messages.header') }}</h2>
 
             <sw-entity-listing
                     :columns="$options.columns"
@@ -22,7 +22,7 @@
             >
                 <template slot="more-actions" slot-scope="{ item }">
                     <sw-context-menu-item @click="resend(item)">
-                        {{ $t('sms77-api.messages.resend') }}
+                        {{ $t('seven-api.messages.resend') }}
                     </sw-context-menu-item>
                 </template>
             </sw-entity-listing>

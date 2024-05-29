@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Sms77\Shopware6\Migration;
+namespace Seven\Shopware6\Migration;
 
 use Doctrine\DBAL\Connection;
 use Shopware\Core\Framework\Migration\MigrationStep;
@@ -12,7 +12,7 @@ class Migration1595155475 extends MigrationStep {
 
     public function update(Connection $connection): void {
         $connection->executeUpdate('
-            CREATE TABLE IF NOT EXISTS `sms77_message` (
+            CREATE TABLE IF NOT EXISTS `seven_message` (
               `id` BINARY(16) NOT NULL,
               `type` VARCHAR(25) NOT NULL,
               `config` LONGTEXT NOT NULL,

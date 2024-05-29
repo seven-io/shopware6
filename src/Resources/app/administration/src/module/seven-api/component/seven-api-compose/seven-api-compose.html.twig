@@ -1,17 +1,17 @@
-{% block sms77_api_compose %}
+{% block seven_api_compose %}
     <sw-page>
         <template slot="smart-bar-header">
-            <h2>{{ $t('sms77-api.compose.header') }}</h2>
+            <h2>{{ $t('seven-api.compose.header') }}</h2>
         </template>
 
         <template slot="smart-bar-actions">
             <sw-button
                     :disabled="isDisabled"
-                    form="sms77_compose"
+                    form="seven_compose"
                     :isLoading="isLoading"
                     variant="primary"
             >
-                {{ $t('sms77-api.compose.submit') }}
+                {{ $t('seven-api.compose.submit') }}
             </sw-button>
         </template>
 
@@ -21,7 +21,7 @@
                 {{ info }}
             </sw-alert>
 
-            <form method="post" style='display: flex;' id='sms77_compose'
+            <form method="post" style='display: flex;' id='seven_compose'
                   @submit.prevent="handleSubmit">
                 <div style='width: 50%; padding-right: 6px;'>
                     <sw-textarea-field
@@ -40,8 +40,8 @@
                     >
                     </sw-text-field>
 
-                    <h3>{{ $t('sms77-api.compose.filters') }}</h3>
-                    <p>{{ $t('sms77-api.compose.intro') }}</p>
+                    <h3>{{ $t('seven-api.compose.filters') }}</h3>
+                    <p>{{ $t('seven-api.compose.intro') }}</p>
 
                     <sw-entity-multi-select
                             @change="setCustomerGroupIds"
@@ -153,57 +153,15 @@
                     ></sw-text-field>
 
                     <sw-switch-field
-                            v-bind='commonSettingAttrs("debug")'
-                            v-model='configuration.smsParams.debug'
-                            v-tooltip='translateSettingTooltip("debug")'
-                    ></sw-switch-field>
-
-                    <sw-switch-field
-                            v-bind='commonSettingAttrs("details")'
-                            v-model='configuration.smsParams.details'
-                            v-tooltip='translateSettingTooltip("details")'
-                    ></sw-switch-field>
-
-                    <sw-switch-field
                             v-bind='commonSettingAttrs("flash")'
                             v-model='configuration.smsParams.flash'
                             v-tooltip='translateSettingTooltip("flash")'
                     ></sw-switch-field>
 
                     <sw-switch-field
-                            v-bind='commonSettingAttrs("json")'
-                            v-model='configuration.smsParams.json'
-                            v-tooltip='translateSettingTooltip("json")'
-                    ></sw-switch-field>
-
-                    <sw-switch-field
-                            v-bind='commonSettingAttrs("no_reload")'
-                            v-model='configuration.smsParams.no_reload'
-                            v-tooltip='translateSettingTooltip("no_reload")'
-                    ></sw-switch-field>
-
-                    <sw-switch-field
                             v-bind='commonSettingAttrs("performance_tracking")'
                             v-model='configuration.smsParams.performance_tracking'
                             v-tooltip='translateSettingTooltip("performance_tracking")'
-                    ></sw-switch-field>
-
-                    <sw-switch-field
-                            v-bind='commonSettingAttrs("return_msg_id")'
-                            v-model='configuration.smsParams.return_msg_id'
-                            v-tooltip='translateSettingTooltip("return_msg_id")'
-                    ></sw-switch-field>
-
-                    <sw-switch-field
-                            v-bind='commonSettingAttrs("unicode")'
-                            v-model='configuration.smsParams.unicode'
-                            v-tooltip='translateSettingTooltip("unicode")'
-                    ></sw-switch-field>
-
-                    <sw-switch-field
-                            v-bind='commonSettingAttrs("utf8")'
-                            v-model='configuration.smsParams.utf8'
-                            v-tooltip='translateSettingTooltip("utf8")'
                     ></sw-switch-field>
                 </div>
             </form>

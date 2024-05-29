@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Sms77\Shopware6;
+namespace Seven\Shopware6;
 
 use Shopware\Core\Framework\Context;
 use Shopware\Core\Framework\DataAbstractionLayer\EntityRepositoryInterface;
@@ -8,9 +8,9 @@ use Shopware\Core\Framework\DataAbstractionLayer\Search\Criteria;
 use Shopware\Core\Framework\DataAbstractionLayer\Search\Filter\ContainsFilter;
 use Shopware\Core\Framework\Plugin;
 use Shopware\Core\Framework\Plugin\Context\UninstallContext;
-use Sms77\Shopware6\Library\Configuration;
+use Seven\Shopware6\Library\Configuration;
 
-class Sms77Shopware6 extends Plugin {
+class SevenShopware6 extends Plugin {
     public function uninstall(UninstallContext $context): void {
         if (!$context->keepUserData()) {
             $this->removeConfiguration($context->getContext());

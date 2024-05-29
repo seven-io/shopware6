@@ -1,19 +1,16 @@
 <?php declare(strict_types=1);
 
-namespace Sms77\Shopware6\Library;
+namespace Seven\Shopware6\Library;
 
 use Shopware\Core\System\SystemConfig\SystemConfigService;
 
 class Configuration {
-    public const CONFIG_KEY = 'Sms77Shopware6.config';
-    /** @var SystemConfigService $systemConfigService */
-    public $systemConfigService;
-    /** @var array|mixed|null $config */
-    public $config;
+    public const CONFIG_KEY = 'SevenShopware6.config';
+    public array|mixed|null $config;
 
-    public function __construct(SystemConfigService $systemConfigService) {
-        $this->systemConfigService = $systemConfigService;
-
+    public function __construct(
+        public SystemConfigService $systemConfigService
+    ) {
         $this->config = $this->systemConfigService->get(self::CONFIG_KEY);
     }
 
@@ -31,7 +28,7 @@ class Configuration {
         return in_array($event, $events);
     }
 
-    public function byKey(string $key) {
+    public function byKey(string $key): mixed {
         return $this->config[$key];
     }
 }
