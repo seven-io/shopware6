@@ -4,6 +4,31 @@
 # See: https://docs.github.com/en/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file
 version: 2
 updates:
+  - package-ecosystem: "npm"
+    directory: "/src/Resources"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+    open-pull-requests-limit: 5
+    # Supply-chain hardening: delay new releases so yanked/compromised
+    # packages (e.g. nx 2024, shai-hulud worm 2025) get detected upstream
+    # before we bump. Security-advisory updates are NOT delayed by cooldown.
+    cooldown:
+      default-days: 5
+      semver-major-days: 14
+      semver-minor-days: 7
+      semver-patch-days: 3
+    groups:
+      security-all:
+        applies-to: security-updates
+        patterns: ["*"]
+      minor-patch:
+        applies-to: version-updates
+        patterns: ["*"]
+        update-types: ["minor", "patch"]
+    ignore:
+      - dependency-name: "@seven/*"
+      - dependency-name: "@sms77/*"
   - package-ecosystem: "composer"
     directory: "/"
     schedule:
